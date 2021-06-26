@@ -72,7 +72,15 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
-        
+
+        <!-- 项目-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-project</artifactId>
+            <version>3.4</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

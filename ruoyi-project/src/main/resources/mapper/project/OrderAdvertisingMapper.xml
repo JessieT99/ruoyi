@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.OrderAdvertisingMapper">
+    
+    <resultMap type="OrderAdvertising" id="OrderAdvertisingResult">
+        <result property="id"    column="id"    />
+        <result property="orderCode"    column="order_code"    />
+        <result property="orderTime"    column="order_time"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="advertisingContent"    column="advertising_content"    />
+        <result property="advertisingImg"    column="advertising_img"    />
+        <result property="publishArea"    column="publish_area"    />
+        <result property="dockIds"    column="dock_ids"    />
+        <result property="openId"    column="open_id"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+	
+	<sql id="selectOrderAdvertisingVo">
+        select id, order_code, order_time, start_time, end_time, advertising_content, advertising_img, publish_area, dock_ids, open_id, user_id from order_advertising
+    </sql>
+	
+    <select id="selectOrderAdvertisingList" parameterType="OrderAdvertising" resultMap="OrderAdvertisingResult">
+        <include refid="selectOrderAdvertisingVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="orderCode != null  and orderCode != '' "> and order_code = #{orderCode}</if>
+             <if test="orderTime != null "> and order_time = #{orderTime}</if>
+             <if test="startTime != null "> and start_time = #{startTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+             <if test="advertisingContent != null  and advertisingContent != '' "> and advertising_content = #{advertisingContent}</if>
+             <if test="advertisingImg != null  and advertisingImg != '' "> and advertising_img = #{advertisingImg}</if>
+             <if test="publishArea != null  and publishArea != '' "> and publish_area = #{publishArea}</if>
+             <if test="dockIds != null  and dockIds != '' "> and dock_ids = #{dockIds}</if>
+             <if test="openId != null  and openId != '' "> and open_id = #{openId}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrderAdvertisingById" parameterType="Long" resultMap="OrderAdvertisingResult">
+        <include refid="selectOrderAdvertisingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOrderAdvertising" parameterType="OrderAdvertising" useGeneratedKeys="true" keyProperty="id">
+        insert into order_advertising
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderCode != null  and orderCode != ''  ">order_code,</if>
+			<if test="orderTime != null  ">order_time,</if>
+			<if test="startTime != null  ">start_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+			<if test="advertisingContent != null  and advertisingContent != ''  ">advertising_content,</if>
+			<if test="advertisingImg != null  and advertisingImg != ''  ">advertising_img,</if>
+			<if test="publishArea != null  and publishArea != ''  ">publish_area,</if>
+			<if test="dockIds != null  and dockIds != ''  ">dock_ids,</if>
+			<if test="openId != null  and openId != ''  ">open_id,</if>
+			<if test="userId != null  ">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderCode != null  and orderCode != ''  ">#{orderCode},</if>
+			<if test="orderTime != null  ">#{orderTime},</if>
+			<if test="startTime != null  ">#{startTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+			<if test="advertisingContent != null  and advertisingContent != ''  ">#{advertisingContent},</if>
+			<if test="advertisingImg != null  and advertisingImg != ''  ">#{advertisingImg},</if>
+			<if test="publishArea != null  and publishArea != ''  ">#{publishArea},</if>
+			<if test="dockIds != null  and dockIds != ''  ">#{dockIds},</if>
+			<if test="openId != null  and openId != ''  ">#{openId},</if>
+			<if test="userId != null  ">#{userId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrderAdvertising" parameterType="OrderAdvertising">
+        update order_advertising
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderCode != null  and orderCode != ''  ">order_code = #{orderCode},</if>
+            <if test="orderTime != null  ">order_time = #{orderTime},</if>
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="advertisingContent != null  and advertisingContent != ''  ">advertising_content = #{advertisingContent},</if>
+            <if test="advertisingImg != null  and advertisingImg != ''  ">advertising_img = #{advertisingImg},</if>
+            <if test="publishArea != null  and publishArea != ''  ">publish_area = #{publishArea},</if>
+            <if test="dockIds != null  and dockIds != ''  ">dock_ids = #{dockIds},</if>
+            <if test="openId != null  and openId != ''  ">open_id = #{openId},</if>
+            <if test="userId != null  ">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrderAdvertisingById" parameterType="Long">
+        delete from order_advertising where id = #{id}
+    </delete>
+	
+    <delete id="deleteOrderAdvertisingByIds" parameterType="String">
+        delete from order_advertising where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
