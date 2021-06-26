@@ -3,6 +3,8 @@ package com.ruoyi.project.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +13,7 @@ import java.util.Date;
  * @author ruoyi
  * @date 2021-06-25
  */
-public class OrderAdvertising extends BaseEntity
+public class OrderAdvertising extends BaseEntity implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	

@@ -1,11 +1,15 @@
 package com.ruoyi.project.mqtt;
 
+import com.alibaba.fastjson.JSON;
+import com.ruoyi.common.json.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -59,7 +63,7 @@ public class MqttPushClient{
      * @param topic 主题名
      * @param pushMessage 消息
      */
-    public void publish(String topic, String pushMessage) {
+    public void publish(String topic, Map<String,Object> pushMessage) {
         publish(0, false, topic, pushMessage);
     }
 
@@ -71,11 +75,11 @@ public class MqttPushClient{
      * @param topic
      * @param pushMessage
      */
-    public void publish(int qos, boolean retained, String topic, String pushMessage) {
+    public void publish(int qos, boolean retained, String topic, Map<String,Object> pushMessage) {
         MqttMessage message = new MqttMessage();
         message.setQos(qos);
         message.setRetained(retained);
-        message.setPayload(pushMessage.getBytes());
+        message.setPayload(JSON.toJSONString(pushMessage).getBytes());
         MqttTopic mTopic = MqttPushClient.getClient().getTopic(topic);
         if (null == mTopic) {
             log.error("主题不存在:{}",mTopic);
