@@ -128,3 +128,16 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+mqtt:
+  host: tcp://114.55.173.94:1883
+  clientid: mqttjs_cloud
+  topic: virus
+  qoslevel: 1
+  #MQTT 认证
+  username: admin
+  password: public
+  # 10s
+  timeout: 10000
+  #20s
+  keepalive: 20
