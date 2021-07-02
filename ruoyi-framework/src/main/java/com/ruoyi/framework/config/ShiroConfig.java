@@ -258,6 +258,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/common/upload/file", "anon,captchaValidate");
         filterChainDefinitionMap.put("/common/download/file", "anon,captchaValidate");
         filterChainDefinitionMap.put("/mqttDemo/testPublishMessage1", "anon,captchaValidate");
+        filterChainDefinitionMap.put("/project/**", "anon,captchaValidate");
 //        filterChainDefinitionMap.put("/project/demo/test", "anon,captchaValidate");
         // 系统权限列表
         // filterChainDefinitionMap.putAll(SpringUtils.getBean(IMenuService.class).selectPermsAll());
