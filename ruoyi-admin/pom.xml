@@ -59,6 +59,8 @@
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>
+            <version>3.4</version>
+            <scope>compile</scope>
         </dependency>
         
         <!-- 定时任务-->
