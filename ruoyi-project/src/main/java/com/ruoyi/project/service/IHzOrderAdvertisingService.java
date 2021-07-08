@@ -1,6 +1,6 @@
 package com.ruoyi.project.service;
 
-import com.ruoyi.project.domain.OrderAdvertising;
+import com.ruoyi.project.domain.HzOrderAdvertising;
 import java.util.List;
 
 /**
@@ -9,7 +9,7 @@ import java.util.List;
  * @author ruoyi
  * @date 2021-06-25
  */
-public interface IOrderAdvertisingService 
+public interface IHzOrderAdvertisingService
 {
 	/**
      * 查询广告订单信息
@@ -17,7 +17,7 @@ public interface IOrderAdvertisingService
      * @param id 广告订单ID
      * @return 广告订单信息
      */
-	public OrderAdvertising selectOrderAdvertisingById(Long id);
+	public HzOrderAdvertising selectOrderAdvertisingById(Long id);
 	
 	/**
      * 查询广告订单列表
@@ -25,7 +25,7 @@ public interface IOrderAdvertisingService
      * @param orderAdvertising 广告订单信息
      * @return 广告订单集合
      */
-	public List<OrderAdvertising> selectOrderAdvertisingList(OrderAdvertising orderAdvertising);
+	public List<HzOrderAdvertising> selectOrderAdvertisingList(HzOrderAdvertising orderAdvertising);
 	
 	/**
      * 新增广告订单
@@ -33,7 +33,7 @@ public interface IOrderAdvertisingService
      * @param orderAdvertising 广告订单信息
      * @return 结果
      */
-	public int insertOrderAdvertising(OrderAdvertising orderAdvertising);
+	public int insertOrderAdvertising(HzOrderAdvertising orderAdvertising);
 	
 	/**
      * 修改广告订单
@@ -41,7 +41,7 @@ public interface IOrderAdvertisingService
      * @param orderAdvertising 广告订单信息
      * @return 结果
      */
-	public int updateOrderAdvertising(OrderAdvertising orderAdvertising);
+	public int updateOrderAdvertising(HzOrderAdvertising orderAdvertising);
 		
 	/**
      * 删除广告订单信息
@@ -51,5 +51,5 @@ public interface IOrderAdvertisingService
      */
 	public int deleteOrderAdvertisingByIds(String ids);
 
-	int submitOrder(OrderAdvertising orderAdvertising);
+	int submitOrder(HzOrderAdvertising orderAdvertising);
 }

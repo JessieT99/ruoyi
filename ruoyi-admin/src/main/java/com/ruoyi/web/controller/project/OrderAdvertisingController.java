@@ -8,8 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.project.domain.OrderAdvertising;
-import com.ruoyi.project.service.IOrderAdvertisingService;
+import com.ruoyi.project.domain.HzOrderAdvertising;
+import com.ruoyi.project.service.IHzOrderAdvertisingService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -28,7 +28,7 @@ public class OrderAdvertisingController extends BaseController
     private String prefix = "system/orderAdvertising";
 	
 	@Autowired
-	private IOrderAdvertisingService orderAdvertisingService;
+	private IHzOrderAdvertisingService orderAdvertisingService;
 	
 	@RequiresPermissions("system:orderAdvertising:view")
 	@GetMapping()
@@ -43,10 +43,10 @@ public class OrderAdvertisingController extends BaseController
 	@RequiresPermissions("system:orderAdvertising:list")
 	@PostMapping("/list")
 	@ResponseBody
-	public TableDataInfo list(OrderAdvertising orderAdvertising)
+	public TableDataInfo list(HzOrderAdvertising orderAdvertising)
 	{
 		startPage();
-        List<OrderAdvertising> list = orderAdvertisingService.selectOrderAdvertisingList(orderAdvertising);
+        List<HzOrderAdvertising> list = orderAdvertisingService.selectOrderAdvertisingList(orderAdvertising);
 		return getDataTable(list);
 	}
 	
@@ -57,10 +57,10 @@ public class OrderAdvertisingController extends BaseController
 	@RequiresPermissions("system:orderAdvertising:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(OrderAdvertising orderAdvertising)
+    public AjaxResult export(HzOrderAdvertising orderAdvertising)
     {
-    	List<OrderAdvertising> list = orderAdvertisingService.selectOrderAdvertisingList(orderAdvertising);
-        ExcelUtil<OrderAdvertising> util = new ExcelUtil<OrderAdvertising>(OrderAdvertising.class);
+    	List<HzOrderAdvertising> list = orderAdvertisingService.selectOrderAdvertisingList(orderAdvertising);
+        ExcelUtil<HzOrderAdvertising> util = new ExcelUtil<HzOrderAdvertising>(HzOrderAdvertising.class);
         return util.exportExcel(list, "orderAdvertising");
     }
 	
@@ -80,7 +80,7 @@ public class OrderAdvertisingController extends BaseController
 	@Log(title = "广告订单", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(@RequestBody OrderAdvertising orderAdvertising)
+	public AjaxResult addSave(@RequestBody HzOrderAdvertising orderAdvertising)
 	{		
 		return toAjax(orderAdvertisingService.insertOrderAdvertising(orderAdvertising));
 	}
@@ -91,7 +91,7 @@ public class OrderAdvertisingController extends BaseController
 	@Log(title = "广告订单", businessType = BusinessType.INSERT)
 	@PostMapping("/submitOrder")
 	@ResponseBody
-	public AjaxResult submitOrder(@RequestBody OrderAdvertising orderAdvertising)
+	public AjaxResult submitOrder(@RequestBody HzOrderAdvertising orderAdvertising)
 	{
 		return toAjax(orderAdvertisingService.submitOrder(orderAdvertising));
 	}
@@ -102,7 +102,7 @@ public class OrderAdvertisingController extends BaseController
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, ModelMap mmap)
 	{
-		OrderAdvertising orderAdvertising = orderAdvertisingService.selectOrderAdvertisingById(id);
+		HzOrderAdvertising orderAdvertising = orderAdvertisingService.selectOrderAdvertisingById(id);
 		mmap.put("orderAdvertising", orderAdvertising);
 	    return prefix + "/edit";
 	}
@@ -114,7 +114,7 @@ public class OrderAdvertisingController extends BaseController
 	@Log(title = "广告订单", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
-	public AjaxResult editSave(OrderAdvertising orderAdvertising)
+	public AjaxResult editSave(HzOrderAdvertising orderAdvertising)
 	{		
 		return toAjax(orderAdvertisingService.updateOrderAdvertising(orderAdvertising));
 	}

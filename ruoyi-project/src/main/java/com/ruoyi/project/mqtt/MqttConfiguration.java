@@ -46,4 +46,13 @@ public class MqttConfiguration {
         new MqttSubClient(mqttPushClient);
         return mqttPushClient;
     }
+
+    /*
+    *方法：后台开个超级权限的MQTT客户端
+           订阅所需的主题
+           Qos设置成2，保证只接收一次，数据不会丢，也不会多
+           将接收到的消息存储到数据库
+    *
+    * 了解到mqtt特性，客户端都是唯一的，发布订阅模式，建立mqtt_root超级客户端，订阅所有主题。主题暂定test_queue。
+    * */
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('新增mqtt接收记录')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-hzMqttReceiveLog-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主题：</label>
+				<div class="col-sm-8">
+					<input id="topic" name="topic" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">qos：</label>
+				<div class="col-sm-8">
+					<input id="qos" name="qos" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内容：</label>
+				<div class="col-sm-8">
+					<input id="content" name="content" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">客户端id：</label>
+				<div class="col-sm-8">
+					<input id="clientId" name="clientId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">标志位：</label>
+				<div class="col-sm-8">
+					<input id="enable" name="enable" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/hzMqttReceiveLog"
+		$("#form-hzMqttReceiveLog-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-hzMqttReceiveLog-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

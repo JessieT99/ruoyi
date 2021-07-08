@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改mqtt接收记录')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-hzMqttReceiveLog-edit" th:object="${hzMqttReceiveLog}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主题：</label>
+				<div class="col-sm-8">
+					<input id="topic" name="topic" th:field="*{topic}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">qos：</label>
+				<div class="col-sm-8">
+					<input id="qos" name="qos" th:field="*{qos}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内容：</label>
+				<div class="col-sm-8">
+					<input id="content" name="content" th:field="*{content}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">客户端id：</label>
+				<div class="col-sm-8">
+					<input id="clientId" name="clientId" th:field="*{clientId}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">标志位：</label>
+				<div class="col-sm-8">
+					<input id="enable" name="enable" th:field="*{enable}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" th:field="*{createTime}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/hzMqttReceiveLog";
+		$("#form-hzMqttReceiveLog-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-hzMqttReceiveLog-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

@@ -8,9 +8,9 @@ import java.util.Map;
 import com.ruoyi.project.mqtt.MqttUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.mapper.OrderAdvertisingMapper;
-import com.ruoyi.project.domain.OrderAdvertising;
-import com.ruoyi.project.service.IOrderAdvertisingService;
+import com.ruoyi.project.mapper.HzOrderAdvertisingMapper;
+import com.ruoyi.project.domain.HzOrderAdvertising;
+import com.ruoyi.project.service.IHzOrderAdvertisingService;
 import com.ruoyi.common.core.text.Convert;
 
 /**
@@ -20,9 +20,9 @@ import com.ruoyi.common.core.text.Convert;
  * @date 2021-06-25
  */
 @Service
-public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
+public class HzOrderAdvertisingServiceImpl implements IHzOrderAdvertisingService {
     @Autowired
-    private OrderAdvertisingMapper orderAdvertisingMapper;
+    private HzOrderAdvertisingMapper orderAdvertisingMapper;
 
     @Autowired
     private MqttUtil mqttUtil;
@@ -35,8 +35,8 @@ public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
      * @return 广告订单信息
      */
     @Override
-    public OrderAdvertising selectOrderAdvertisingById(Long id) {
-        return orderAdvertisingMapper.selectOrderAdvertisingById(id);
+    public HzOrderAdvertising selectOrderAdvertisingById(Long id) {
+        return orderAdvertisingMapper.selectHzOrderAdvertisingById(id);
     }
 
     /**
@@ -46,8 +46,8 @@ public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
      * @return 广告订单集合
      */
     @Override
-    public List<OrderAdvertising> selectOrderAdvertisingList(OrderAdvertising orderAdvertising) {
-        return orderAdvertisingMapper.selectOrderAdvertisingList(orderAdvertising);
+    public List<HzOrderAdvertising> selectOrderAdvertisingList(HzOrderAdvertising orderAdvertising) {
+        return orderAdvertisingMapper.selectHzOrderAdvertisingList(orderAdvertising);
     }
 
     /**
@@ -57,8 +57,8 @@ public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
      * @return 结果
      */
     @Override
-    public int insertOrderAdvertising(OrderAdvertising orderAdvertising) {
-        return orderAdvertisingMapper.insertOrderAdvertising(orderAdvertising);
+    public int insertOrderAdvertising(HzOrderAdvertising orderAdvertising) {
+        return orderAdvertisingMapper.insertHzOrderAdvertising(orderAdvertising);
     }
 
     /**
@@ -68,8 +68,8 @@ public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
      * @return 结果
      */
     @Override
-    public int updateOrderAdvertising(OrderAdvertising orderAdvertising) {
-        return orderAdvertisingMapper.updateOrderAdvertising(orderAdvertising);
+    public int updateOrderAdvertising(HzOrderAdvertising orderAdvertising) {
+        return orderAdvertisingMapper.updateHzOrderAdvertising(orderAdvertising);
     }
 
     /**
@@ -80,16 +80,16 @@ public class OrderAdvertisingServiceImpl implements IOrderAdvertisingService {
      */
     @Override
     public int deleteOrderAdvertisingByIds(String ids) {
-        return orderAdvertisingMapper.deleteOrderAdvertisingByIds(Convert.toStrArray(ids));
+        return orderAdvertisingMapper.deleteHzOrderAdvertisingByIds(Convert.toStrArray(ids));
     }
 
     @Override
-    public int submitOrder(OrderAdvertising orderAdvertising) {
+    public int submitOrder(HzOrderAdvertising orderAdvertising) {
         //订单编号
         String code = System.currentTimeMillis() + "000" + (orderAdvertising.getUserId() == null ? 1 : orderAdvertising.getUserId());
         orderAdvertising.setOrderCode(code);
         orderAdvertising.setOrderTime(new Date());
-        int i = orderAdvertisingMapper.insertOrderAdvertising(orderAdvertising);
+        int i = orderAdvertisingMapper.insertHzOrderAdvertising(orderAdvertising);
         if (i > 0) {
 			Map<String,Object> data = new HashMap<>();
 			data.put("openId",orderAdvertising.getOpenId());
