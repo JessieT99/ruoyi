@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.HzMqttReceiveLogMapper">
+
+    <resultMap type="HzMqttReceiveLog" id="HzMqttReceiveLogResult">
+        <result property="id" column="id"/>
+        <result property="topic" column="topic"/>
+        <result property="qos" column="qos"/>
+        <result property="content" column="content"/>
+        <result property="clientId" column="client_id"/>
+        <result property="enable" column="enable"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectHzMqttReceiveLogVo">
+        select id, topic, qos, content, client_id, enable, create_time from hz_mqtt_receive_log
+    </sql>
+
+    <select id="selectHzMqttReceiveLogList" parameterType="HzMqttReceiveLog" resultMap="HzMqttReceiveLogResult">
+        <include refid="selectHzMqttReceiveLogVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="topic != null  and topic != '' ">and topic = #{topic}</if>
+            <if test="qos != null  and qos != '' ">and qos = #{qos}</if>
+            <if test="content != null  and content != '' ">and content = #{content}</if>
+            <if test="clientId != null  and clientId != '' ">and client_id = #{clientId}</if>
+            <if test="enable != null ">and enable = #{enable}</if>
+            <if test="createTime != null ">and create_time = #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="selectHzMqttReceiveLogById" parameterType="Long" resultMap="HzMqttReceiveLogResult">
+        <include refid="selectHzMqttReceiveLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHzMqttReceiveLog" parameterType="HzMqttReceiveLog" useGeneratedKeys="true" keyProperty="id">
+        insert into hz_mqtt_receive_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="topic != null  and topic != ''  ">topic,</if>
+            <if test="qos != null  and qos != ''  ">qos,</if>
+            <if test="content != null  and content != ''  ">content,</if>
+            <if test="clientId != null  and clientId != ''  ">client_id,</if>
+            <if test="enable != null  ">enable,</if>
+            <if test="createTime != null  ">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="topic != null  and topic != ''  ">#{topic},</if>
+            <if test="qos != null  and qos != ''  ">#{qos},</if>
+            <if test="content != null  and content != ''  ">#{content},</if>
+            <if test="clientId != null  and clientId != ''  ">#{clientId},</if>
+            <if test="enable != null  ">#{enable},</if>
+            <if test="createTime != null  ">#{createTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHzMqttReceiveLog" parameterType="HzMqttReceiveLog">
+        update hz_mqtt_receive_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="topic != null  and topic != ''  ">topic = #{topic},</if>
+            <if test="qos != null  and qos != ''  ">qos = #{qos},</if>
+            <if test="content != null  and content != ''  ">content = #{content},</if>
+            <if test="clientId != null  and clientId != ''  ">client_id = #{clientId},</if>
+            <if test="enable != null  ">enable = #{enable},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHzMqttReceiveLogById" parameterType="Long">
+        delete from hz_mqtt_receive_log where id = #{id}
+    </delete>
+
+    <delete id="deleteHzMqttReceiveLogByIds" parameterType="String">
+        delete from hz_mqtt_receive_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

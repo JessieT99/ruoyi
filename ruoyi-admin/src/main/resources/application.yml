@@ -131,7 +131,7 @@ xss:
 
 mqtt:
   host: tcp://114.55.173.94:1883
-  clientid: mqttjs_test
+  clientid: mqtt_root
   topic: virus
   qoslevel: 1
   #MQTT 认证

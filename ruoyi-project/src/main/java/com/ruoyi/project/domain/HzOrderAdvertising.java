@@ -13,7 +13,7 @@ import java.util.Date;
  * @author ruoyi
  * @date 2021-06-25
  */
-public class OrderAdvertising extends BaseEntity implements Serializable
+public class HzOrderAdvertising extends BaseEntity implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	

@@ -1,5 +1,7 @@
 package com.ruoyi.project.mqtt;
 
+import com.ruoyi.project.domain.HzMqttReceiveLog;
+import com.ruoyi.project.service.IHzMqttReceiveLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -7,11 +9,18 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Slf4j
 @Component
 public class PushCallback implements MqttCallback {
+
     @Autowired
     private MqttConfiguration mqttConfiguration;
+
+    @Autowired
+    private IHzMqttReceiveLogService hzMqttReceiveLogService;
+
 
     @Override
     public void connectionLost(Throwable cause) {        // 连接丢失后，一般在这里面进行重连
@@ -45,7 +54,15 @@ public class PushCallback implements MqttCallback {
         log.info("接收消息主题 : " + topic);
         log.info("接收消息Qos : " + message.getQos());
         log.info("接收消息内容 : " + new String(message.getPayload()));
-
+        log.info("接收信息："+message.getId());
+        HzMqttReceiveLog mqttReceiveLog = new HzMqttReceiveLog();
+        mqttReceiveLog.setClientId("");
+        mqttReceiveLog.setEnable(0);
+        mqttReceiveLog.setCreateTime(new Date());
+        mqttReceiveLog.setTopic(topic);
+        mqttReceiveLog.setQos(String.valueOf(message.getQos()));
+        mqttReceiveLog.setContent(new String(message.getPayload()));
+        hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
     }
 
 }
