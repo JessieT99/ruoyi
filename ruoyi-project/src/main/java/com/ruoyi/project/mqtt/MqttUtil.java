@@ -13,5 +13,7 @@ public class MqttUtil {
 
     public void testPublishMessage(String topic, Map<String,Object> data) {
         mqttPushClient.publish(topic,data);
+
     }
+
 }
