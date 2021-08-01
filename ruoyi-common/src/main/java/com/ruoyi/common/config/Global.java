@@ -139,4 +139,12 @@ public class Global
     {
         return getConfig("ruoyi.profile") + "upload/";
     }
+
+    /**
+     * 获取下载分片路径
+     */
+    public static String getDownShardPath()
+    {
+        return getConfig("ruoyi.profile") + "shard/";
+    }
 }
