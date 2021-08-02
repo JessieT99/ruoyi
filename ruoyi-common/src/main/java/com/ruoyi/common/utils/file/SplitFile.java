@@ -43,8 +43,8 @@ public class SplitFile {
                 offSet = getWrite(file, i, begin, end);
             }
             if (length - offSet > 0) {
-                count++;
                 getWrite(file, count, offSet, length);
+                count++;
             }
             result = count;
 
