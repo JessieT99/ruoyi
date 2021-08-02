@@ -10,7 +10,7 @@ import java.io.RandomAccessFile;
 public class SplitFile {
 
     public static void main(String[] args) throws IOException {
-        getSplitFile();
+//        getSplitFile();
         String file = SplitFileParam.file; //文件的路径
         RandomAccessFile raf = null;
         raf = new RandomAccessFile(new File(file), "r");
@@ -22,10 +22,11 @@ public class SplitFile {
 
     /**
      * 文件分割方法
+     * @return
      */
-    public static void getSplitFile() {
-        String file = SplitFileParam.file; //文件的路径
-
+    public static long getSplitFile(String file) {
+//        String file = SplitFileParam.file; //文件的路径
+        long result = 0L;
         RandomAccessFile raf = null;
         try {
             //获取目标文件 预分配文件所占的空间 在磁盘中创建一个指定大小的文件   r 是只读
@@ -42,8 +43,10 @@ public class SplitFile {
                 offSet = getWrite(file, i, begin, end);
             }
             if (length - offSet > 0) {
+                count++;
                 getWrite(file, count, offSet, length);
             }
+            result = count;
 
         } catch (FileNotFoundException e) {
             System.out.println("没有找到文件");
@@ -57,6 +60,7 @@ public class SplitFile {
                 e.printStackTrace();
             }
         }
+        return result;
     }
 
     /**
