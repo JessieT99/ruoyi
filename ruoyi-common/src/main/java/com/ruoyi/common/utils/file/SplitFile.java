@@ -80,7 +80,7 @@ public class SplitFile {
             //申明文件切割后的文件磁盘
             RandomAccessFile in = new RandomAccessFile(new File(file), "r");
             //定义一个可读，可写的文件并且后缀名为.tmp的二进制文件
-            RandomAccessFile out = new RandomAccessFile(new File(a + "_" + i + ".tmp"), "rw");
+            RandomAccessFile out = new RandomAccessFile(new File(a + "_" + i + ".bmp"), "rw");
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
