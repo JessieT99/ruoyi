@@ -117,7 +117,7 @@ public class Global
     }
 
     /**
-     * 获取头像上传路径
+     * 获取头像上传路径shardFile
      */
     public static String getAvatarPath()
     {
