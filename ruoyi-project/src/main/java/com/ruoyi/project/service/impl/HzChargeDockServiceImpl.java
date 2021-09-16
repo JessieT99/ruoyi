@@ -3,6 +3,7 @@ package com.ruoyi.project.service.impl;
 import java.util.List;
 import java.util.UUID;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.mapper.HzChargeDockMapper;
@@ -83,5 +84,10 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 	{
 		return hzChargeDockMapper.deleteHzChargeDockByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public void scanCode(JSONObject params) {
+		//
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.ruoyi.project.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.project.domain.HzChargeDock;
 import java.util.List;
 
@@ -50,5 +51,12 @@ public interface IHzChargeDockService
      * @return 结果
      */
 	public int deleteHzChargeDockByIds(String ids);
-	
+
+	/**
+	 * 扫描充电坞二维码
+	 *
+	 * @param params openId，dockCode
+	 * @return 结果
+	 */
+	void scanCode(JSONObject params);
 }

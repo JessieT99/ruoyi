@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.project;
 
 import java.util.List;
+
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 @RequestMapping("/project/hzChargeDock")
 public class HzChargeDockController extends BaseController
 {
-    private String prefix = "system/hzChargeDock";
+    private String prefix = "project/hzChargeDock";
 	
 	@Autowired
 	private IHzChargeDockService hzChargeDockService;
@@ -35,6 +37,18 @@ public class HzChargeDockController extends BaseController
 	public String hzChargeDock()
 	{
 	    return prefix + "/hzChargeDock";
+	}
+
+	/**
+	 * 扫描充电坞二维码
+	 */
+//	@RequiresPermissions("project:hzChargeDock:list")
+	@PostMapping("/scanCode")
+	@ResponseBody
+	public AjaxResult scanCode(JSONObject params)
+	{
+		hzChargeDockService.scanCode(params);
+		return success();
 	}
 	
 	/**
