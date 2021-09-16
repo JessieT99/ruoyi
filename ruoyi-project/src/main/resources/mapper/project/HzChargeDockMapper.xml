@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.HzChargeDockMapper">
+    
+    <resultMap type="HzChargeDock" id="HzChargeDockResult">
+        <result property="id"    column="id"    />
+        <result property="createUserId"    column="create_user_id"    />
+        <result property="codeUnique"    column="code_unique"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="area"    column="area"    />
+        <result property="location"    column="location"    />
+        <result property="shopName"    column="shop_name"    />
+        <result property="businessDistrict"    column="business_district"    />
+        <result property="chargeTankNum"    column="charge_tank_num"    />
+        <result property="locationLongitude"    column="location_longitude"    />
+        <result property="locationLatitude"    column="location_latitude"    />
+    </resultMap>
+	
+	<sql id="selectHzChargeDockVo">
+        select id, create_user_id, code_unique, province, city, area, location, shop_name, business_district, charge_tank_num, location_longitude, location_latitude from hz_charge_dock
+    </sql>
+	
+    <select id="selectHzChargeDockList" parameterType="HzChargeDock" resultMap="HzChargeDockResult">
+        <include refid="selectHzChargeDockVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="createUserId != null "> and create_user_id = #{createUserId}</if>
+             <if test="codeUnique != null  and codeUnique != '' "> and code_unique = #{codeUnique}</if>
+             <if test="province != null  and province != '' "> and province = #{province}</if>
+             <if test="city != null  and city != '' "> and city = #{city}</if>
+             <if test="area != null  and area != '' "> and area = #{area}</if>
+             <if test="location != null  and location != '' "> and location = #{location}</if>
+             <if test="shopName != null  and shopName != '' "> and shop_name = #{shopName}</if>
+             <if test="businessDistrict != null  and businessDistrict != '' "> and business_district = #{businessDistrict}</if>
+             <if test="chargeTankNum != null  and chargeTankNum != '' "> and charge_tank_num = #{chargeTankNum}</if>
+             <if test="locationLongitude != null  and locationLongitude != '' "> and location_longitude = #{locationLongitude}</if>
+             <if test="locationLatitude != null  and locationLatitude != '' "> and location_latitude = #{locationLatitude}</if>
+         </where>
+    </select>
+    
+    <select id="selectHzChargeDockById" parameterType="Long" resultMap="HzChargeDockResult">
+        <include refid="selectHzChargeDockVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHzChargeDock" parameterType="HzChargeDock" useGeneratedKeys="true" keyProperty="id">
+        insert into hz_charge_dock
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="createUserId != null  ">create_user_id,</if>
+			<if test="codeUnique != null  and codeUnique != ''  ">code_unique,</if>
+			<if test="province != null  and province != ''  ">province,</if>
+			<if test="city != null  and city != ''  ">city,</if>
+			<if test="area != null  and area != ''  ">area,</if>
+			<if test="location != null  and location != ''  ">location,</if>
+			<if test="shopName != null  and shopName != ''  ">shop_name,</if>
+			<if test="businessDistrict != null  and businessDistrict != ''  ">business_district,</if>
+			<if test="chargeTankNum != null  and chargeTankNum != ''  ">charge_tank_num,</if>
+			<if test="locationLongitude != null  and locationLongitude != ''  ">location_longitude,</if>
+			<if test="locationLatitude != null  and locationLatitude != ''  ">location_latitude,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="createUserId != null  ">#{createUserId},</if>
+			<if test="codeUnique != null  and codeUnique != ''  ">#{codeUnique},</if>
+			<if test="province != null  and province != ''  ">#{province},</if>
+			<if test="city != null  and city != ''  ">#{city},</if>
+			<if test="area != null  and area != ''  ">#{area},</if>
+			<if test="location != null  and location != ''  ">#{location},</if>
+			<if test="shopName != null  and shopName != ''  ">#{shopName},</if>
+			<if test="businessDistrict != null  and businessDistrict != ''  ">#{businessDistrict},</if>
+			<if test="chargeTankNum != null  and chargeTankNum != ''  ">#{chargeTankNum},</if>
+			<if test="locationLongitude != null  and locationLongitude != ''  ">#{locationLongitude},</if>
+			<if test="locationLatitude != null  and locationLatitude != ''  ">#{locationLatitude},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateHzChargeDock" parameterType="HzChargeDock">
+        update hz_charge_dock
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createUserId != null  ">create_user_id = #{createUserId},</if>
+            <if test="codeUnique != null  and codeUnique != ''  ">code_unique = #{codeUnique},</if>
+            <if test="province != null  and province != ''  ">province = #{province},</if>
+            <if test="city != null  and city != ''  ">city = #{city},</if>
+            <if test="area != null  and area != ''  ">area = #{area},</if>
+            <if test="location != null  and location != ''  ">location = #{location},</if>
+            <if test="shopName != null  and shopName != ''  ">shop_name = #{shopName},</if>
+            <if test="businessDistrict != null  and businessDistrict != ''  ">business_district = #{businessDistrict},</if>
+            <if test="chargeTankNum != null  and chargeTankNum != ''  ">charge_tank_num = #{chargeTankNum},</if>
+            <if test="locationLongitude != null  and locationLongitude != ''  ">location_longitude = #{locationLongitude},</if>
+            <if test="locationLatitude != null  and locationLatitude != ''  ">location_latitude = #{locationLatitude},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteHzChargeDockById" parameterType="Long">
+        delete from hz_charge_dock where id = #{id}
+    </delete>
+	
+    <delete id="deleteHzChargeDockByIds" parameterType="String">
+        delete from hz_charge_dock where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

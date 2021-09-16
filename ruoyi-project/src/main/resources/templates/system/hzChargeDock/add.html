@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('新增充电坞')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-hzChargeDock-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">创建人：</label>
+				<div class="col-sm-8">
+					<input id="createUserId" name="createUserId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">唯一编码：</label>
+				<div class="col-sm-8">
+					<input id="codeUnique" name="codeUnique" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">省：</label>
+				<div class="col-sm-8">
+					<input id="province" name="province" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">市：</label>
+				<div class="col-sm-8">
+					<input id="city" name="city" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">区：</label>
+				<div class="col-sm-8">
+					<input id="area" name="area" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">街道具体地址：</label>
+				<div class="col-sm-8">
+					<input id="location" name="location" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">店铺名称：</label>
+				<div class="col-sm-8">
+					<input id="shopName" name="shopName" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">商圈：</label>
+				<div class="col-sm-8">
+					<input id="businessDistrict" name="businessDistrict" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">充电槽：</label>
+				<div class="col-sm-8">
+					<input id="chargeTankNum" name="chargeTankNum" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">经度：</label>
+				<div class="col-sm-8">
+					<input id="locationLongitude" name="locationLongitude" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">纬度：</label>
+				<div class="col-sm-8">
+					<input id="locationLatitude" name="locationLatitude" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/hzChargeDock"
+		$("#form-hzChargeDock-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			},
+			focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-hzChargeDock-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

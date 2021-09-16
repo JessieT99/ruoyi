@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.HzBankOrderMapper">
+    
+    <resultMap type="HzBankOrder" id="HzBankOrderResult">
+        <result property="id"    column="id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="orderUser"    column="order_user"    />
+        <result property="dockId"    column="dock_id"    />
+        <result property="bankId"    column="bank_id"    />
+        <result property="orderCode"    column="order_code"    />
+        <result property="orderTime"    column="order_time"    />
+        <result property="orderCost"    column="order_cost"    />
+        <result property="orderStatus"    column="order_status"    />
+    </resultMap>
+	
+	<sql id="selectHzBankOrderVo">
+        select id, start_time, end_time, order_user, dock_id, bank_id, order_code, order_time, order_cost, order_status from hz_bank_order
+    </sql>
+	
+    <select id="selectHzBankOrderList" parameterType="HzBankOrder" resultMap="HzBankOrderResult">
+        <include refid="selectHzBankOrderVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="startTime != null "> and start_time = #{startTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+             <if test="orderUser != null  and orderUser != '' "> and order_user = #{orderUser}</if>
+             <if test="dockId != null "> and dock_id = #{dockId}</if>
+             <if test="bankId != null "> and bank_id = #{bankId}</if>
+             <if test="orderCode != null  and orderCode != '' "> and order_code = #{orderCode}</if>
+             <if test="orderTime != null "> and order_time = #{orderTime}</if>
+             <if test="orderCost != null "> and order_cost = #{orderCost}</if>
+             <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+         </where>
+    </select>
+    
+    <select id="selectHzBankOrderById" parameterType="Long" resultMap="HzBankOrderResult">
+        <include refid="selectHzBankOrderVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHzBankOrder" parameterType="HzBankOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into hz_bank_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="startTime != null  ">start_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+			<if test="orderUser != null  and orderUser != ''  ">order_user,</if>
+			<if test="dockId != null  ">dock_id,</if>
+			<if test="bankId != null  ">bank_id,</if>
+			<if test="orderCode != null  and orderCode != ''  ">order_code,</if>
+			<if test="orderTime != null  ">order_time,</if>
+			<if test="orderCost != null  ">order_cost,</if>
+			<if test="orderStatus != null  ">order_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="startTime != null  ">#{startTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+			<if test="orderUser != null  and orderUser != ''  ">#{orderUser},</if>
+			<if test="dockId != null  ">#{dockId},</if>
+			<if test="bankId != null  ">#{bankId},</if>
+			<if test="orderCode != null  and orderCode != ''  ">#{orderCode},</if>
+			<if test="orderTime != null  ">#{orderTime},</if>
+			<if test="orderCost != null  ">#{orderCost},</if>
+			<if test="orderStatus != null  ">#{orderStatus},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateHzBankOrder" parameterType="HzBankOrder">
+        update hz_bank_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="orderUser != null  and orderUser != ''  ">order_user = #{orderUser},</if>
+            <if test="dockId != null  ">dock_id = #{dockId},</if>
+            <if test="bankId != null  ">bank_id = #{bankId},</if>
+            <if test="orderCode != null  and orderCode != ''  ">order_code = #{orderCode},</if>
+            <if test="orderTime != null  ">order_time = #{orderTime},</if>
+            <if test="orderCost != null  ">order_cost = #{orderCost},</if>
+            <if test="orderStatus != null  ">order_status = #{orderStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteHzBankOrderById" parameterType="Long">
+        delete from hz_bank_order where id = #{id}
+    </delete>
+	
+    <delete id="deleteHzBankOrderByIds" parameterType="String">
+        delete from hz_bank_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
