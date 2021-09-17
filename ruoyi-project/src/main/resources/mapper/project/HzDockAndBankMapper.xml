@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.HzDockAndBankMapper">
+
+    <resultMap type="HzDockAndBank" id="HzDockAndBankResult">
+        <result property="id" column="id"/>
+        <result property="dockId" column="dock_id"/>
+        <result property="bankId" column="bank_id"/>
+        <result property="state" column="state"/>
+    </resultMap>
+
+    <sql id="selectHzDockAndBankVo">
+        select id, dock_id, bank_id, state from hz_dock_and_bank
+    </sql>
+
+    <select id="selectHzDockAndBankList" parameterType="HzDockAndBank" resultMap="HzDockAndBankResult">
+        <include refid="selectHzDockAndBankVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="dockId != null ">and dock_id = #{dockId}</if>
+            <if test="bankId != null ">and bank_id = #{bankId}</if>
+            <if test="state != null ">and state = #{state}</if>
+        </where>
+    </select>
+
+    <select id="selectHzDockAndBankById" parameterType="Long" resultMap="HzDockAndBankResult">
+        <include refid="selectHzDockAndBankVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertHzDockAndBank" parameterType="HzDockAndBank">
+        insert into hz_dock_and_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">id,</if>
+            <if test="dockId != null  ">dock_id,</if>
+            <if test="bankId != null  ">bank_id,</if>
+            <if test="state != null  ">state,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">#{id},</if>
+            <if test="dockId != null  ">#{dockId},</if>
+            <if test="bankId != null  ">#{bankId},</if>
+            <if test="state != null  ">#{state},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHzDockAndBank" parameterType="HzDockAndBank">
+        update hz_dock_and_bank
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dockId != null  ">dock_id = #{dockId},</if>
+            <if test="bankId != null  ">bank_id = #{bankId},</if>
+            <if test="state != null  ">state = #{state},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHzDockAndBankById" parameterType="Long">
+        delete from hz_dock_and_bank where id = #{id}
+    </delete>
+
+    <delete id="deleteHzDockAndBankByIds" parameterType="String">
+        delete from hz_dock_and_bank where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
