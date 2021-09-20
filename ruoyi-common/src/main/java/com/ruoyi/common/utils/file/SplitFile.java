@@ -1,13 +1,37 @@
 package com.ruoyi.common.utils.file;
 
+import com.ruoyi.common.config.Global;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.net.URL;
 
 public class SplitFile {
+
+    public static long getShardFile(String fileUrl){
+        long fileCount = 0L;
+        try {
+            URL url = new URL(fileUrl);
+            String file = url.getFile();
+            String[] strArray = file.split("/");
+            String fileName = strArray[strArray.length - 1];
+            String filePath = Global.getDownShardPath() + fileName;
+
+            InputStream inputStream = url.openStream();
+            byte[] b = new byte[1024];
+            FileOutputStream fos = new FileOutputStream(filePath);
+            while ((inputStream.read(b)) != -1) {
+                fos.write(b);// 写入数据
+            }
+            inputStream.close();
+            fos.close();// 保存数据
+            fileCount = SplitFile.getSplitFile(filePath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileCount;
+    }
 
     public static void main(String[] args) throws IOException {
 //        getSplitFile();
@@ -73,7 +97,7 @@ public class SplitFile {
      * @return long
      */
     public static long getWrite(String file, long i, long begin, long end) {
-        String a = file.split(".mp3")[0];
+        String a = file.split(".XXX")[0];
         long endPointer = 0L;
         byte[] data = null;
         try {
@@ -121,7 +145,7 @@ public class SplitFile {
      * @param count    文件个数
      */
     public static void merge(String file, String tempFile, long count) {
-        String a = tempFile.split(".mp3")[0];
+        String a = tempFile.split(".XXX")[0];
         RandomAccessFile raf = null;
         try {
             //申明随机读取文件RandomAccessFile

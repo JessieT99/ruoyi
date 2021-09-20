@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.file.SplitFile;
 import com.ruoyi.project.mqtt.MqttUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,6 +99,12 @@ public class HzOrderAdvertisingServiceImpl implements IHzOrderAdvertisingService
 			data.put("content",orderAdvertising.getAdvertisingContent());
 			data.put("imgUrl",orderAdvertising.getAdvertisingImg());
 			mqttUtil.testPublishMessage("test_queue",data);
+        }
+        if (!StringUtils.isEmpty(orderAdvertising.getAdvertisingImg())){
+            String[] split = orderAdvertising.getAdvertisingImg().split(",");
+            for (String str:split){
+                SplitFile.getShardFile(str);
+            }
         }
         return i;
     }
