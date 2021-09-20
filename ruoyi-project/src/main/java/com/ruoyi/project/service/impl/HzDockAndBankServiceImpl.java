@@ -79,5 +79,10 @@ public class HzDockAndBankServiceImpl implements IHzDockAndBankService
 	{
 		return hzDockAndBankMapper.deleteHzDockAndBankByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public Integer getExistBank(String qrCode) {
+		return hzDockAndBankMapper.getExistBank(qrCode);
+	}
+
 }

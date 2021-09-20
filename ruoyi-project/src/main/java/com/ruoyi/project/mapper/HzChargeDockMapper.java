@@ -58,5 +58,6 @@ public interface HzChargeDockMapper
      * @return 结果
      */
 	public int deleteHzChargeDockByIds(String[] ids);
-	
+
+    List<HzChargeDock> getDockList();
 }

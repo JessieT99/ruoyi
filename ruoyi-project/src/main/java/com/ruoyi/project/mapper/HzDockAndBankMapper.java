@@ -58,5 +58,6 @@ public interface HzDockAndBankMapper
      * @return 结果
      */
 	public int deleteHzDockAndBankByIds(String[] ids);
-	
+
+	Integer getExistBank(String qrCode);
 }

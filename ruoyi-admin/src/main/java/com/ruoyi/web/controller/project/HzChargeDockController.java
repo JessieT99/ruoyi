@@ -40,14 +40,16 @@ public class HzChargeDockController extends BaseController
 	}
 
 	/**
-	 * 扫描充电坞二维码
+	 * 扫描充电坞二维码借充电宝
 	 */
 //	@RequiresPermissions("project:hzChargeDock:list")
-	@PostMapping("/scanCode")
+	@PostMapping("/rentBank")
 	@ResponseBody
-	public AjaxResult scanCode(JSONObject params)
+	public AjaxResult rentBank(JSONObject params)
 	{
-		hzChargeDockService.scanCode(params);
+		String openId = params.getString("openId");
+		String qrCode = params.getString("qrCode");
+		hzChargeDockService.rentBank(openId,qrCode);
 		return success();
 	}
 	

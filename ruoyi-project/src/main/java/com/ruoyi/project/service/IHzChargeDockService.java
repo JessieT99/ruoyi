@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface IHzChargeDockService 
 {
+
 	/**
      * 查询充电坞信息
      * 
@@ -55,8 +56,12 @@ public interface IHzChargeDockService
 	/**
 	 * 扫描充电坞二维码
 	 *
-	 * @param params openId，dockCode
+	 * @param params openId 用户id，dockCode充电坞二维码
+	 *               1.查询充电坞是否存在充电宝
+	 *               2.
 	 * @return 结果
 	 */
-	void scanCode(JSONObject params);
+	void rentBank(String openId, String qrCode);
+
+	List<HzChargeDock> getDockList();
 }

@@ -50,5 +50,11 @@ public interface IHzDockAndBankService
      * @return 结果
      */
 	public int deleteHzDockAndBankByIds(String ids);
-	
+
+	/**
+	 * 查询充电坞是否存在充电宝
+	 * @param qrCode
+	 * @return
+	 */
+	Integer getExistBank(String qrCode);
 }

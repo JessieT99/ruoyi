@@ -79,5 +79,10 @@ public class HzPowerBankServiceImpl implements IHzPowerBankService
 	{
 		return hzPowerBankMapper.deleteHzPowerBankByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public List<HzPowerBank> getBankByCode(String qrCode) {
+		return hzPowerBankMapper.getBankByCode(qrCode);
+	}
+
 }

@@ -45,7 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectHzChargeDockVo"/>
         where id = #{id}
     </select>
-        
+    <select id="getDockList" resultMap="HzChargeDockResult">
+        <include refid="selectHzChargeDockVo"/>
+    </select>
+
     <insert id="insertHzChargeDock" parameterType="HzChargeDock" useGeneratedKeys="true" keyProperty="id">
         insert into hz_charge_dock
 		<trim prefix="(" suffix=")" suffixOverrides=",">

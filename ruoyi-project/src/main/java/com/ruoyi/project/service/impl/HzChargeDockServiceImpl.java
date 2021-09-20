@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.common.exception.base.BaseException;
+import com.ruoyi.project.domain.HzPowerBank;
+import com.ruoyi.project.service.IHzDockAndBankService;
+import com.ruoyi.project.service.IHzPowerBankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.mapper.HzChargeDockMapper;
@@ -22,6 +26,12 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 {
 	@Autowired
 	private HzChargeDockMapper hzChargeDockMapper;
+
+	@Autowired
+	private IHzDockAndBankService hzDockAndBankService;
+
+	@Autowired
+	private IHzPowerBankService hzPowerBankService;
 
 	/**
      * 查询充电坞信息
@@ -86,8 +96,18 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 	}
 
 	@Override
-	public void scanCode(JSONObject params) {
-		//
+	public void rentBank(String openId, String qrCode) {
+		Integer num  = hzDockAndBankService.getExistBank(qrCode);
+		if (num<1){
+			new BaseException("project","004",null,"充电坞没有可用充电宝！") ;
+		}
+		List<HzPowerBank> bankList = hzPowerBankService.getBankByCode(qrCode);
+
+	}
+
+	@Override
+	public List<HzChargeDock> getDockList() {
+		return hzChargeDockMapper.getDockList();
 	}
 
 }

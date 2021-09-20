@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.mapper.HzPowerBankMapper">
-    
+
     <resultMap type="HzPowerBank" id="HzPowerBankResult">
-        <result property="id"    column="id"    />
-        <result property="codeUnique"    column="code_unique"    />
-        <result property="bankStatus"    column="bank_status"    />
-        <result property="bankElectricity"    column="bank_electricity"    />
+        <result property="id" column="id"/>
+        <result property="codeUnique" column="code_unique"/>
+        <result property="bankStatus" column="bank_status"/>
+        <result property="bankElectricity" column="bank_electricity"/>
     </resultMap>
-	
-	<sql id="selectHzPowerBankVo">
+
+    <sql id="selectHzPowerBankVo">
         select id, code_unique, bank_status, bank_electricity from hz_power_bank
     </sql>
-	
+
     <select id="selectHzPowerBankList" parameterType="HzPowerBank" resultMap="HzPowerBankResult">
         <include refid="selectHzPowerBankVo"/>
-        <where>  
-            <if test="id != null "> and id = #{id}</if>
-             <if test="codeUnique != null  and codeUnique != '' "> and code_unique = #{codeUnique}</if>
-             <if test="bankStatus != null "> and bank_status = #{bankStatus}</if>
-             <if test="bankElectricity != null "> and bank_electricity = #{bankElectricity}</if>
-         </where>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="codeUnique != null  and codeUnique != '' ">and code_unique = #{codeUnique}</if>
+            <if test="bankStatus != null ">and bank_status = #{bankStatus}</if>
+            <if test="bankElectricity != null ">and bank_electricity = #{bankElectricity}</if>
+        </where>
     </select>
-    
+
     <select id="selectHzPowerBankById" parameterType="Long" resultMap="HzPowerBankResult">
         <include refid="selectHzPowerBankVo"/>
         where id = #{id}
     </select>
-        
+    <select id="getBankByCode" resultType="com.ruoyi.project.domain.HzPowerBank"
+            parameterType="java.lang.String">
+        SELECT hp.* FROM `hz_dock_and_bank` hd INNER join hz_charge_dock hc on hd.dock_id = hc.id INNER join hz_power_bank hp on hd.bank_id = hp.id
+        where hc.code_unique = 'hz_test'  and hd.state = 1
+    </select>
+
     <insert id="insertHzPowerBank" parameterType="HzPowerBank" useGeneratedKeys="true" keyProperty="id">
         insert into hz_power_bank
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="codeUnique != null  and codeUnique != ''  ">code_unique,</if>
-			<if test="bankStatus != null  ">bank_status,</if>
-			<if test="bankElectricity != null  ">bank_electricity,</if>
-         </trim>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="codeUnique != null  and codeUnique != ''  ">code_unique,</if>
+            <if test="bankStatus != null  ">bank_status,</if>
+            <if test="bankElectricity != null  ">bank_electricity,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="codeUnique != null  and codeUnique != ''  ">#{codeUnique},</if>
-			<if test="bankStatus != null  ">#{bankStatus},</if>
-			<if test="bankElectricity != null  ">#{bankElectricity},</if>
-         </trim>
+            <if test="codeUnique != null  and codeUnique != ''  ">#{codeUnique},</if>
+            <if test="bankStatus != null  ">#{bankStatus},</if>
+            <if test="bankElectricity != null  ">#{bankElectricity},</if>
+        </trim>
     </insert>
-	 
+
     <update id="updateHzPowerBank" parameterType="HzPowerBank">
         update hz_power_bank
         <trim prefix="SET" suffixOverrides=",">
@@ -54,15 +59,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-	<delete id="deleteHzPowerBankById" parameterType="Long">
+    <delete id="deleteHzPowerBankById" parameterType="Long">
         delete from hz_power_bank where id = #{id}
     </delete>
-	
+
     <delete id="deleteHzPowerBankByIds" parameterType="String">
-        delete from hz_power_bank where id in 
+        delete from hz_power_bank where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-    
+
 </mapper>

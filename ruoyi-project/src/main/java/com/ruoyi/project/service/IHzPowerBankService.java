@@ -50,5 +50,6 @@ public interface IHzPowerBankService
      * @return 结果
      */
 	public int deleteHzPowerBankByIds(String ids);
-	
+
+    List<HzPowerBank> getBankByCode(String qrCode);
 }

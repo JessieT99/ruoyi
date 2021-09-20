@@ -29,6 +29,10 @@
         <include refid="selectHzDockAndBankVo"/>
         where id = #{id}
     </select>
+    <select id="getExistBank" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) totalCount FROM `hz_dock_and_bank` hd INNER join hz_charge_dock hc on hd.dock_id = hc.id
+     where hc.code_unique = #{qrCode} and hd.state = 1
+    </select>
 
     <insert id="insertHzDockAndBank" parameterType="HzDockAndBank">
         insert into hz_dock_and_bank
