@@ -1,12 +1,15 @@
 package com.ruoyi.project.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.exception.base.BaseException;
 import com.ruoyi.project.config.CoreBaseDataLoaderMqttClient;
 import com.ruoyi.project.domain.HzPowerBank;
+import com.ruoyi.project.mqtt.util.MqttPushClientNew;
 import com.ruoyi.project.service.IHzDockAndBankService;
 import com.ruoyi.project.service.IHzPowerBankService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +36,6 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 
 	@Autowired
 	private IHzPowerBankService hzPowerBankService;
-
-	@Autowired
-	private CoreBaseDataLoaderMqttClient loaderMqttClient;
 
 	/**
      * 查询充电坞信息
@@ -106,7 +106,13 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 			new BaseException("project","004",null,"充电坞没有可用充电宝！") ;
 		}
 		List<HzPowerBank> bankList = hzPowerBankService.getBankByCode(qrCode);
-
+		Map<String, MqttPushClientNew> map =  CoreBaseDataLoaderMqttClient.MQTT_PUSH_CLIENT_MAP;
+		MqttPushClientNew mqttPushClientNew = map.get(qrCode);
+		Map<String,Object> data = new HashMap<>();
+		data.put("openId",openId);
+		data.put("qrCode",qrCode);
+		data.put("bankList",bankList);
+		mqttPushClientNew.publish(qrCode,data);
 	}
 
 	@Override

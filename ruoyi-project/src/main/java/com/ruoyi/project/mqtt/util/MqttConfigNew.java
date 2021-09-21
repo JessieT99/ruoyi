@@ -39,7 +39,7 @@ public class MqttConfigNew {
         //连接至mqtt服务器，获取mqtt连接
         mqttPushClientNew.connect(host, clientId, userName, password, timeout, keepAlive);
         //一连接mqtt,就订阅默认需要订阅的主题（如test_queue）
-        new MqttSubClientNew(mqttPushClientNew);
+        new MqttSubClientNew(mqttPushClientNew,clientId);
         return mqttPushClientNew;
     }
 

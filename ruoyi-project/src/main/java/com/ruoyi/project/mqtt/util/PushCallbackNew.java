@@ -15,8 +15,8 @@ import java.util.Date;
 @Component
 public class PushCallbackNew implements MqttCallback {
 
-    @Autowired
-    private MqttConfigNew mqttConfigNew;
+//    @Autowired
+//    private MqttConfigNew mqttConfigNew;
 
     @Autowired
     private IHzMqttReceiveLogService hzMqttReceiveLogService;
@@ -24,13 +24,13 @@ public class PushCallbackNew implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {        // 连接丢失后，一般在这里面进行重连
-        log.info("连接断开，正在重连");
-        MqttPushClientNew mqttPushClient = mqttConfigNew.getMqttPushClientNew();
-        if (null != mqttPushClient) {
-            mqttPushClient.connect(mqttConfigNew.getHost(), mqttConfigNew.getClientId(), mqttConfigNew.getUserName(),
-                    mqttConfigNew.getPassword(), mqttConfigNew.getTimeout(), mqttConfigNew.getKeepAlive());
-            log.info("已重连");
-        }
+//        log.info("连接断开，正在重连");
+//        MqttPushClientNew mqttPushClient = mqttConfigNew.getMqttPushClientNew();
+//        if (null != mqttPushClient) {
+//            mqttPushClient.connect(mqttConfigNew.getHost(), mqttConfigNew.getClientId(), mqttConfigNew.getUserName(),
+//                    mqttConfigNew.getPassword(), mqttConfigNew.getTimeout(), mqttConfigNew.getKeepAlive());
+//            log.info("已重连");
+//        }
 
     }
 
@@ -51,18 +51,18 @@ public class PushCallbackNew implements MqttCallback {
     @Override
     public void messageArrived(String topic, MqttMessage message) {
         // subscribe后得到的消息会执行到这里面,这里在控制台有输出
-        log.info("接收消息主题 : " + topic);
-        log.info("接收消息Qos : " + message.getQos());
-        log.info("接收消息内容 : " + new String(message.getPayload()));
-        log.info("接收信息："+message.getId());
-        HzMqttReceiveLog mqttReceiveLog = new HzMqttReceiveLog();
-        mqttReceiveLog.setClientId("");
-        mqttReceiveLog.setEnable(0);
-        mqttReceiveLog.setCreateTime(new Date());
-        mqttReceiveLog.setTopic(topic);
-        mqttReceiveLog.setQos(String.valueOf(message.getQos()));
-        mqttReceiveLog.setContent(new String(message.getPayload()));
-        hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
+        log.info("new接收消息主题 : " + topic);
+        log.info("new接收消息Qos : " + message.getQos());
+        log.info("new接收消息内容 : " + new String(message.getPayload()));
+        log.info("new接收信息："+message.getId());
+//        HzMqttReceiveLog mqttReceiveLog = new HzMqttReceiveLog();
+//        mqttReceiveLog.setClientId("");
+//        mqttReceiveLog.setEnable(0);
+//        mqttReceiveLog.setCreateTime(new Date());
+//        mqttReceiveLog.setTopic(topic);
+//        mqttReceiveLog.setQos(String.valueOf(message.getQos()));
+//        mqttReceiveLog.setContent(new String(message.getPayload()));
+//        hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
     }
 
 }

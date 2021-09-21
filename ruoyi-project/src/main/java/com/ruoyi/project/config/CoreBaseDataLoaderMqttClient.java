@@ -20,7 +20,7 @@ import java.util.Map;
 @Slf4j
 public class CoreBaseDataLoaderMqttClient implements ApplicationRunner {
 
-    public static Map<String,MqttPushClientNew> mqttClientMap = new HashMap<>();
+    public static final Map<String,MqttPushClientNew> MQTT_PUSH_CLIENT_MAP = new HashMap<>();
 
     @Autowired
     private IHzChargeDockService hzChargeDockService;
@@ -55,9 +55,9 @@ public class CoreBaseDataLoaderMqttClient implements ApplicationRunner {
             MqttConfigNew mqttConfigNew = new MqttConfigNew();
             mqttConfigNew.setClientId(codeUnique);
             MqttPushClientNew mqttPushClientNew = mqttConfigNew.getMqttPushClientNew();
-            mqttClientMap.put(codeUnique,mqttPushClientNew);
+            MQTT_PUSH_CLIENT_MAP.put(codeUnique,mqttPushClientNew);
         }
-        log.info("mqttClientMap:{}",mqttClientMap);
+        log.info("mqttClientMap:{}",MQTT_PUSH_CLIENT_MAP);
     }
 
 

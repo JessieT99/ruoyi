@@ -16,17 +16,29 @@ import org.springframework.stereotype.Component;
 public class MqttSubClientNew {
 
     private MqttPushClientNew mqttPushClient;
+    private String clientId;
+
+    public  MqttSubClientNew(){
+        this.mqttPushClient = mqttPushClient;
+        this.clientId = clientId;
+    }
 
     public MqttSubClientNew(MqttPushClientNew mqttPushClient){
         this.mqttPushClient = mqttPushClient;
         subScribeDataPublishTopic();
     }
 
+    public MqttSubClientNew(MqttPushClientNew mqttPushClient,String clientId){
+        this.mqttPushClient = mqttPushClient;
+        this.clientId = clientId;
+        subScribeDataPublishTopic();
+    }
+
 
     private void subScribeDataPublishTopic(){
         //订阅test_queue主题
-       subscribe("test_queue");
-       subscribe("yrd");
+//       subscribe("test_queue");
+       subscribe(clientId);
     }
 
     /**

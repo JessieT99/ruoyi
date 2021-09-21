@@ -45,7 +45,7 @@ public class HzChargeDockController extends BaseController
 //	@RequiresPermissions("project:hzChargeDock:list")
 	@PostMapping("/rentBank")
 	@ResponseBody
-	public AjaxResult rentBank(JSONObject params)
+	public AjaxResult rentBank(@RequestBody JSONObject params)
 	{
 		String openId = params.getString("openId");
 		String qrCode = params.getString("qrCode");
