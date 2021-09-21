@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.exception.base.BaseException;
+import com.ruoyi.project.config.CoreBaseDataLoaderMqttClient;
 import com.ruoyi.project.domain.HzPowerBank;
 import com.ruoyi.project.service.IHzDockAndBankService;
 import com.ruoyi.project.service.IHzPowerBankService;
@@ -32,6 +33,9 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 
 	@Autowired
 	private IHzPowerBankService hzPowerBankService;
+
+	@Autowired
+	private CoreBaseDataLoaderMqttClient loaderMqttClient;
 
 	/**
      * 查询充电坞信息

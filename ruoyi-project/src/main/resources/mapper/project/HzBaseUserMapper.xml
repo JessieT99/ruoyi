@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.HzBaseUserMapper">
+    
+    <resultMap type="HzBaseUser" id="HzBaseUserResult">
+        <result property="id"    column="id"    />
+        <result property="openId"    column="open_id"    />
+        <result property="headPhoto"    column="head_photo"    />
+        <result property="niclName"    column="nicl_name"    />
+        <result property="country"    column="country"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectHzBaseUserVo">
+        select id, open_id, head_photo, nicl_name, country, province, city, remark from hz_base_user
+    </sql>
+	
+    <select id="selectHzBaseUserList" parameterType="HzBaseUser" resultMap="HzBaseUserResult">
+        <include refid="selectHzBaseUserVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="openId != null  and openId != '' "> and open_id = #{openId}</if>
+             <if test="headPhoto != null  and headPhoto != '' "> and head_photo = #{headPhoto}</if>
+             <if test="niclName != null  and niclName != '' "> and nicl_name = #{niclName}</if>
+             <if test="country != null  and country != '' "> and country = #{country}</if>
+             <if test="province != null  and province != '' "> and province = #{province}</if>
+             <if test="city != null  and city != '' "> and city = #{city}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectHzBaseUserById" parameterType="Long" resultMap="HzBaseUserResult">
+        <include refid="selectHzBaseUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHzBaseUser" parameterType="HzBaseUser" useGeneratedKeys="true" keyProperty="id">
+        insert into hz_base_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="openId != null  and openId != ''  ">open_id,</if>
+			<if test="headPhoto != null  and headPhoto != ''  ">head_photo,</if>
+			<if test="niclName != null  and niclName != ''  ">nicl_name,</if>
+			<if test="country != null  and country != ''  ">country,</if>
+			<if test="province != null  and province != ''  ">province,</if>
+			<if test="city != null  and city != ''  ">city,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="openId != null  and openId != ''  ">#{openId},</if>
+			<if test="headPhoto != null  and headPhoto != ''  ">#{headPhoto},</if>
+			<if test="niclName != null  and niclName != ''  ">#{niclName},</if>
+			<if test="country != null  and country != ''  ">#{country},</if>
+			<if test="province != null  and province != ''  ">#{province},</if>
+			<if test="city != null  and city != ''  ">#{city},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateHzBaseUser" parameterType="HzBaseUser">
+        update hz_base_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="openId != null  and openId != ''  ">open_id = #{openId},</if>
+            <if test="headPhoto != null  and headPhoto != ''  ">head_photo = #{headPhoto},</if>
+            <if test="niclName != null  and niclName != ''  ">nicl_name = #{niclName},</if>
+            <if test="country != null  and country != ''  ">country = #{country},</if>
+            <if test="province != null  and province != ''  ">province = #{province},</if>
+            <if test="city != null  and city != ''  ">city = #{city},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteHzBaseUserById" parameterType="Long">
+        delete from hz_base_user where id = #{id}
+    </delete>
+	
+    <delete id="deleteHzBaseUserByIds" parameterType="String">
+        delete from hz_base_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

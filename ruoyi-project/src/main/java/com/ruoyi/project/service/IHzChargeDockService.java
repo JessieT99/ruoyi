@@ -56,7 +56,8 @@ public interface IHzChargeDockService
 	/**
 	 * 扫描充电坞二维码
 	 *
-	 * @param params openId 用户id，dockCode充电坞二维码
+	 * @param openId openId 用户id
+	 * @param qrCode dockCode充电坞二维码
 	 *               1.查询充电坞是否存在充电宝
 	 *               2.
 	 * @return 结果
