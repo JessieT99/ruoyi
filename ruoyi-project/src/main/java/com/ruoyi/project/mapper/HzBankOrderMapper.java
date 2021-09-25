@@ -1,7 +1,9 @@
 package com.ruoyi.project.mapper;
 
 import com.ruoyi.project.domain.HzBankOrder;
-import java.util.List;	
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 充电宝订单 数据层
@@ -58,5 +60,6 @@ public interface HzBankOrderMapper
      * @return 结果
      */
 	public int deleteHzBankOrderByIds(String[] ids);
-	
+
+    List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
 }

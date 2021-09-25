@@ -1,6 +1,9 @@
 package com.ruoyi.project.service;
 
 import com.ruoyi.project.domain.HzBankOrder;
+import com.ruoyi.project.vo.HzBankOrderGIveVo;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,5 +53,16 @@ public interface IHzBankOrderService
      * @return 结果
      */
 	public int deleteHzBankOrderByIds(String ids);
-	
+
+	/**
+	 * 查询充电宝订单信息
+	 *
+	 * @param  openId 需要删除的数据ID
+	 * @param  qrCode 需要删除的数据ID
+	 * @param  date 需要删除的数据ID
+	 * @return 结果
+	 */
+    List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
+
+	void insertOrder(HzBankOrderGIveVo hzBankOrderGIveVo);
 }

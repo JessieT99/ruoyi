@@ -1,6 +1,6 @@
 package com.ruoyi.project.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.project.domain.HzBankOrder;
 import com.ruoyi.project.domain.HzChargeDock;
 import java.util.List;
 
@@ -62,7 +62,7 @@ public interface IHzChargeDockService
 	 *               2.
 	 * @return 结果
 	 */
-	void rentBank(String openId, String qrCode);
+	HzBankOrder rentBank(String openId, String qrCode) throws InterruptedException;
 
 	List<HzChargeDock> getDockList();
 }

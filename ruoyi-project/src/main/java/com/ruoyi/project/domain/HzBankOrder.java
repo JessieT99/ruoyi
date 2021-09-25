@@ -25,9 +25,9 @@ public class HzBankOrder extends BaseEntity
 	/** 用户 */
 	private String orderUser;
 	/** 充电坞id */
-	private Long dockId;
+	private String dockId;
 	/** 充电宝id */
-	private Long bankId;
+	private String bankId;
 	/** 订单编号 */
 	private String orderCode;
 	/** 订单耗时 */
@@ -73,21 +73,21 @@ public class HzBankOrder extends BaseEntity
 	{
 		return orderUser;
 	}
-	public void setDockId(Long dockId) 
+	public void setDockId(String dockId)
 	{
 		this.dockId = dockId;
 	}
 
-	public Long getDockId() 
+	public String getDockId()
 	{
 		return dockId;
 	}
-	public void setBankId(Long bankId) 
+	public void setBankId(String bankId)
 	{
 		this.bankId = bankId;
 	}
 
-	public Long getBankId() 
+	public String getBankId()
 	{
 		return bankId;
 	}

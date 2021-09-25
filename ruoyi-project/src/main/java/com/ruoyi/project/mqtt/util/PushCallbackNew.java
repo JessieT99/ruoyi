@@ -1,7 +1,15 @@
 package com.ruoyi.project.mqtt.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.common.enums.MqttStatus;
+import com.ruoyi.common.enums.MqttType;
+import com.ruoyi.common.exception.base.BaseException;
+import com.ruoyi.project.domain.HzBankOrder;
 import com.ruoyi.project.domain.HzMqttReceiveLog;
+import com.ruoyi.project.service.IHzBankOrderService;
 import com.ruoyi.project.service.IHzMqttReceiveLogService;
+import com.ruoyi.project.vo.HzBankOrderGIveVo;
+import jdk.nashorn.internal.runtime.Context;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -10,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -21,6 +30,8 @@ public class PushCallbackNew implements MqttCallback {
     @Autowired
     private IHzMqttReceiveLogService hzMqttReceiveLogService;
 
+    @Autowired
+    private IHzBankOrderService hzBankOrderService;
 
     @Override
     public void connectionLost(Throwable cause) {        // 连接丢失后，一般在这里面进行重连
@@ -40,7 +51,6 @@ public class PushCallbackNew implements MqttCallback {
      */
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
-
     }
 
     /**
@@ -55,14 +65,23 @@ public class PushCallbackNew implements MqttCallback {
         log.info("new接收消息Qos : " + message.getQos());
         log.info("new接收消息内容 : " + new String(message.getPayload()));
         log.info("new接收信息："+message.getId());
-//        HzMqttReceiveLog mqttReceiveLog = new HzMqttReceiveLog();
-//        mqttReceiveLog.setClientId("");
-//        mqttReceiveLog.setEnable(0);
-//        mqttReceiveLog.setCreateTime(new Date());
-//        mqttReceiveLog.setTopic(topic);
-//        mqttReceiveLog.setQos(String.valueOf(message.getQos()));
-//        mqttReceiveLog.setContent(new String(message.getPayload()));
-//        hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
+        HzMqttReceiveLog mqttReceiveLog = new HzMqttReceiveLog();
+        mqttReceiveLog.setClientId("");
+        mqttReceiveLog.setEnable(0);
+        mqttReceiveLog.setCreateTime(new Date());
+        mqttReceiveLog.setTopic(topic);
+        mqttReceiveLog.setQos(String.valueOf(message.getQos()));
+        mqttReceiveLog.setContent(new String(message.getPayload()));
+        hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
+        HzBankOrderGIveVo hzBankOrderGIveVo = JSONObject.parseObject(new String(message.getPayload()), HzBankOrderGIveVo.class);
+        if (hzBankOrderGIveVo == null || Objects.equals(MqttStatus.HZ_BANK_ERROR.getCode(),hzBankOrderGIveVo.getStatus())){
+            new BaseException("project","mqtt消息不正确",null,hzBankOrderGIveVo.toString());
+            return;
+        }
+        if (Objects.equals(MqttType.HZ_BANK_LEND.getCode(),hzBankOrderGIveVo.getType())){//借出充电宝，生成订单
+            hzBankOrderService.insertOrder(hzBankOrderGIveVo);
+
+        }
     }
 
 }

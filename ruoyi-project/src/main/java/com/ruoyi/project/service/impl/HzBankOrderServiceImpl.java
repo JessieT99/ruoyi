@@ -1,12 +1,18 @@
 package com.ruoyi.project.service.impl;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.enums.OrderStatus;
+import com.ruoyi.project.vo.HzBankOrderGIveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.mapper.HzBankOrderMapper;
 import com.ruoyi.project.domain.HzBankOrder;
 import com.ruoyi.project.service.IHzBankOrderService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 充电宝订单 服务层实现
@@ -79,5 +85,26 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 	{
 		return hzBankOrderMapper.deleteHzBankOrderByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date) {
+		return hzBankOrderMapper.getBankHzOrder(openId,qrCode,date);
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public void insertOrder(HzBankOrderGIveVo vo) {
+		HzBankOrder hzBankOrder = new HzBankOrder();
+		Date date = new Date();
+		hzBankOrder.setStartTime(date);
+		hzBankOrder.setOrderUser(vo.getOpenId());
+		hzBankOrder.setDockId(vo.getQrCode());
+		hzBankOrder.setBankId(vo.getBankId());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		hzBankOrder.setOrderCode(vo.getOpenId()+calendar.getTimeInMillis());
+		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_CREATE.getCode());
+		insertHzBankOrder(hzBankOrder);
+	}
+
 }
