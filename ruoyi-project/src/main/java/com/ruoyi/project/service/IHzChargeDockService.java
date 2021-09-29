@@ -67,4 +67,6 @@ public interface IHzChargeDockService
 	List<HzChargeDock> getDockList();
 
 	Long getDockIdByUniqueCode(String code);
+
+	HzBankOrder returnBank(String openId, String qrCode) throws InterruptedException;
 }

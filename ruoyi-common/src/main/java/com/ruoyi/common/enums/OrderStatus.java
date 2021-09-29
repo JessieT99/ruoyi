@@ -6,7 +6,7 @@ package com.ruoyi.common.enums;
  * @author ruoyi
  */
 public enum OrderStatus {
-    HZ_ORDER_CREATE(0, "创建订单"),
+    HZ_ORDER_GOING(0, "正在进行订单"),
     HZ_ORDER_FINISH(1, "完成订单"),
     HZ_ORDER_EXCEPTION(-1, "异常订单");
 

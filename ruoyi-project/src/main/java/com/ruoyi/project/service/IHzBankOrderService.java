@@ -1,7 +1,7 @@
 package com.ruoyi.project.service;
 
 import com.ruoyi.project.domain.HzBankOrder;
-import com.ruoyi.project.vo.HzBankOrderGIveVo;
+import com.ruoyi.project.vo.HzBankRequestVO;
 
 import java.util.Date;
 import java.util.List;
@@ -64,5 +64,9 @@ public interface IHzBankOrderService
 	 */
     List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
 
-	void insertOrder(HzBankOrderGIveVo hzBankOrderGIveVo);
+	void insertOrder(HzBankRequestVO hzBankRequestVO);
+
+	List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode);
+
+	void updateOrder(HzBankRequestVO hzBankRequestVO);
 }

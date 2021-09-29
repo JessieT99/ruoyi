@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.enums.OrderStatus;
-import com.ruoyi.project.vo.HzBankOrderGIveVo;
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.project.service.IHzDockAndBankService;
+import com.ruoyi.project.vo.HzBankRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.mapper.HzBankOrderMapper;
@@ -25,6 +27,9 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 {
 	@Autowired
 	private HzBankOrderMapper hzBankOrderMapper;
+
+	@Autowired
+	private IHzDockAndBankService hzDockAndBankService;
 
 	/**
      * 查询充电宝订单信息
@@ -93,7 +98,7 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public void insertOrder(HzBankOrderGIveVo vo) {
+	public void insertOrder(HzBankRequestVO vo) {
 		HzBankOrder hzBankOrder = new HzBankOrder();
 		Date date = new Date();
 		hzBankOrder.setStartTime(date);
@@ -103,8 +108,27 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		hzBankOrder.setOrderCode(vo.getOpenId()+calendar.getTimeInMillis());
-		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_CREATE.getCode());
+		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_GOING.getCode());
 		insertHzBankOrder(hzBankOrder);
 	}
+
+	@Override
+	public List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode) {
+		return hzBankOrderMapper.getBankHzOrderByOpenId(openId,qrCode);
+	}
+
+	@Override
+	public void updateOrder(HzBankRequestVO hzBankRequestVO) {
+		HzBankOrder hzBankOrder = selectHzBankOrderById(hzBankRequestVO.getOrderId());
+		Date endTime = new Date();
+		hzBankOrder.setEndTime(endTime);
+		Long datePoorSecond = DateUtils.getDatePoorSecond(endTime, hzBankOrder.getStartTime());
+		hzBankOrder.setOrderTime(datePoorSecond);
+		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_FINISH.getCode());
+
+		hzDockAndBankService.insertRelation(hzBankOrder.getDockId(),hzBankOrder.getBankId());
+
+	}
+
 
 }

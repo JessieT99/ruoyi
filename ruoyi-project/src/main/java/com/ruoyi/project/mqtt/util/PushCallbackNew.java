@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.enums.MqttStatus;
 import com.ruoyi.common.enums.MqttType;
 import com.ruoyi.common.exception.base.BaseException;
-import com.ruoyi.project.domain.HzBankOrder;
 import com.ruoyi.project.domain.HzMqttReceiveLog;
 import com.ruoyi.project.service.IHzBankOrderService;
 import com.ruoyi.project.service.IHzMqttReceiveLogService;
-import com.ruoyi.project.vo.HzBankOrderGIveVo;
-import jdk.nashorn.internal.runtime.Context;
+import com.ruoyi.project.vo.HzBankRequestVO;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -73,14 +71,15 @@ public class PushCallbackNew implements MqttCallback {
         mqttReceiveLog.setQos(String.valueOf(message.getQos()));
         mqttReceiveLog.setContent(new String(message.getPayload()));
         hzMqttReceiveLogService.insertHzMqttReceiveLog(mqttReceiveLog);
-        HzBankOrderGIveVo hzBankOrderGIveVo = JSONObject.parseObject(new String(message.getPayload()), HzBankOrderGIveVo.class);
-        if (hzBankOrderGIveVo == null || Objects.equals(MqttStatus.HZ_BANK_ERROR.getCode(),hzBankOrderGIveVo.getStatus())){
-            new BaseException("project","mqtt消息不正确",null,hzBankOrderGIveVo.toString());
+        HzBankRequestVO hzBankRequestVO = JSONObject.parseObject(new String(message.getPayload()), HzBankRequestVO.class);
+        if (hzBankRequestVO == null || Objects.equals(MqttStatus.HZ_BANK_ERROR.getCode(), hzBankRequestVO.getStatus())){
+            new BaseException("project","mqtt消息不正确",null, hzBankRequestVO.toString());
             return;
         }
-        if (Objects.equals(MqttType.HZ_BANK_LEND.getCode(),hzBankOrderGIveVo.getType())){//借出充电宝，生成订单
-            hzBankOrderService.insertOrder(hzBankOrderGIveVo);
-
+        if (Objects.equals(MqttType.HZ_BANK_RENT.getCode(), hzBankRequestVO.getType())){//借出充电宝，生成订单
+            hzBankOrderService.insertOrder(hzBankRequestVO);
+        }else if(Objects.equals(MqttType.HZ_BANK_RETURN.getCode(), hzBankRequestVO.getType())){
+            hzBankOrderService.updateOrder(hzBankRequestVO);
         }
     }
 

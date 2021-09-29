@@ -55,6 +55,21 @@ public class HzChargeDockController extends BaseController {
     }
 
     /**
+     * 扫描充电坞二维码归还充电宝
+     */
+    @PostMapping("/returnBank")
+    @ResponseBody
+    public AjaxResult returnBank(@RequestBody JSONObject params) throws InterruptedException {
+        String openId = params.getString("openId");
+        String qrCode = params.getString("qrCode");
+        HzBankOrder hzBankOrder = hzChargeDockService.returnBank(openId, qrCode);
+        if (hzBankOrder == null){
+            return error("归还充电宝失败，请联系客服！");
+        }
+        return AjaxResult.success(hzBankOrder);
+    }
+
+    /**
      * 查询充电坞列表
      */
     @RequiresPermissions("project:hzChargeDock:list")

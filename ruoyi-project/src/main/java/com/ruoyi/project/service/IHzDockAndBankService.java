@@ -65,4 +65,6 @@ public interface IHzDockAndBankService
 	 * @return
 	 */
 	void removeRelation(String bankId, String dockId);
+
+    void insertRelation(String dockId, String bankId);
 }

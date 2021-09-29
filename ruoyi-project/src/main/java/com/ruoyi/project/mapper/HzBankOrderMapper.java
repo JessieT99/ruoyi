@@ -62,4 +62,6 @@ public interface HzBankOrderMapper
 	public int deleteHzBankOrderByIds(String[] ids);
 
     List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
+
+	List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode);
 }

@@ -31,7 +31,7 @@ public class HzBankOrder extends BaseEntity
 	/** 订单编号 */
 	private String orderCode;
 	/** 订单耗时 */
-	private Integer orderTime;
+	private Long orderTime;
 	/** 订单费用 */
 	private BigDecimal orderCost;
 	/** 订单状态 */
@@ -100,12 +100,12 @@ public class HzBankOrder extends BaseEntity
 	{
 		return orderCode;
 	}
-	public void setOrderTime(Integer orderTime) 
+	public void setOrderTime(Long orderTime)
 	{
 		this.orderTime = orderTime;
 	}
 
-	public Integer getOrderTime() 
+	public Long getOrderTime()
 	{
 		return orderTime;
 	}

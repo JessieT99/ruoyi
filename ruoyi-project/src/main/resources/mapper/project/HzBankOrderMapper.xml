@@ -45,6 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectHzBankOrderVo"/>
         where order_user = #{openId}  and start_time > #{date}
     </select>
+    <select id="getBankHzOrderByOpenId" resultMap="HzBankOrderResult">
+        <include refid="selectHzBankOrderVo"/>
+        where order_user = #{openId}  and dock_id = #{qrCode} and state = 0
+    </select>
 
     <insert id="insertHzBankOrder" parameterType="HzBankOrder" useGeneratedKeys="true" keyProperty="id">
         insert into hz_bank_order

@@ -11,6 +11,7 @@ import com.ruoyi.project.mapper.HzDockAndBankMapper;
 import com.ruoyi.project.domain.HzDockAndBank;
 import com.ruoyi.project.service.IHzDockAndBankService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 充电坞与充电宝关联 服务层实现
@@ -98,6 +99,17 @@ public class HzDockAndBankServiceImpl implements IHzDockAndBankService {
         Long dId = hzChargeDockService.getDockIdByUniqueCode(dockId);
         Long bId = hzPowerBankService.getBankIdByCode(bankId);
         hzDockAndBankMapper.removeRelation(dId, bId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void insertRelation(String dockId, String bankId) {
+        Long dId = hzChargeDockService.getDockIdByUniqueCode(dockId);
+        Long bId = hzPowerBankService.getBankIdByCode(bankId);
+        HzDockAndBank hzDockAndBank = new HzDockAndBank();
+        hzDockAndBank.setBankId(bId);
+        hzDockAndBank.setDockId(dId);
+        insertHzDockAndBank(hzDockAndBank);
     }
 
 }
