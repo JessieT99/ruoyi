@@ -57,4 +57,5 @@ public interface IHzDockAndBankService
 	 * @return
 	 */
 	Integer getExistBank(String qrCode);
+
 }

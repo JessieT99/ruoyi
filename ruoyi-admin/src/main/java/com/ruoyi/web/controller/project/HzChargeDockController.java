@@ -49,7 +49,7 @@ public class HzChargeDockController extends BaseController {
         String qrCode = params.getString("qrCode");
         HzBankOrder hzBankOrder = hzChargeDockService.rentBank(openId, qrCode);
         if (hzBankOrder == null){
-            return error();
+            return error("借用充电宝失败，请联系客服！");
         }
         return AjaxResult.success(hzBankOrder);
     }

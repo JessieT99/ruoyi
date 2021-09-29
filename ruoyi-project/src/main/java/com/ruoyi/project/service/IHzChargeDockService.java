@@ -65,4 +65,6 @@ public interface IHzChargeDockService
 	HzBankOrder rentBank(String openId, String qrCode) throws InterruptedException;
 
 	List<HzChargeDock> getDockList();
+
+	Long getDockIdByUniqueCode(String code);
 }

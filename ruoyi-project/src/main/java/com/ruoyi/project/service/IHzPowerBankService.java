@@ -52,4 +52,11 @@ public interface IHzPowerBankService
 	public int deleteHzPowerBankByIds(String ids);
 
     List<HzPowerBank> getBankByCode(String qrCode);
+
+	/**
+	 * 查询充电宝ID
+	 * @param code 充电宝唯一标识
+	 * @return
+	 */
+	Long getBankIdByCode(String code);
 }

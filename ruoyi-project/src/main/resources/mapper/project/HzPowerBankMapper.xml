@@ -34,6 +34,9 @@
         SELECT hp.* FROM `hz_dock_and_bank` hd INNER join hz_charge_dock hc on hd.dock_id = hc.id INNER join hz_power_bank hp on hd.bank_id = hp.id
         where hc.code_unique = #{qrCode}  and hd.state = 1
     </select>
+    <select id="getBankIdByCode" resultType="java.lang.Long">
+        select id from hz_power_bank where code_unique=#{code}
+    </select>
 
     <insert id="insertHzPowerBank" parameterType="HzPowerBank" useGeneratedKeys="true" keyProperty="id">
         insert into hz_power_bank

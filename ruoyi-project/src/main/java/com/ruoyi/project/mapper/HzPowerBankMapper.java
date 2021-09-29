@@ -60,4 +60,6 @@ public interface HzPowerBankMapper
 	public int deleteHzPowerBankByIds(String[] ids);
 
     List<HzPowerBank> getBankByCode(String qrCode);
+
+    Long getBankIdByCode(String code);
 }

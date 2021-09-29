@@ -85,4 +85,9 @@ public class HzPowerBankServiceImpl implements IHzPowerBankService
 		return hzPowerBankMapper.getBankByCode(qrCode);
 	}
 
+	@Override
+	public Long getBankIdByCode(String code) {
+		return hzPowerBankMapper.getBankIdByCode(code);
+	}
+
 }

@@ -60,4 +60,6 @@ public interface HzChargeDockMapper
 	public int deleteHzChargeDockByIds(String[] ids);
 
     List<HzChargeDock> getDockList();
+
+    Long getDockIdByUniqueCode(String code);
 }

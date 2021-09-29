@@ -27,7 +27,7 @@ import com.ruoyi.common.core.text.Convert;
  * @date 2021-09-16
  */
 @Service
-public class HzChargeDockServiceImpl implements IHzChargeDockService 
+public class HzChargeDockServiceImpl implements IHzChargeDockService
 {
 	@Autowired
 	private HzChargeDockMapper hzChargeDockMapper;
@@ -138,6 +138,11 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 	@Override
 	public List<HzChargeDock> getDockList() {
 		return hzChargeDockMapper.getDockList();
+	}
+
+	@Override
+	public Long getDockIdByUniqueCode(String code) {
+		return hzChargeDockMapper.getDockIdByUniqueCode(code);
 	}
 
 }
