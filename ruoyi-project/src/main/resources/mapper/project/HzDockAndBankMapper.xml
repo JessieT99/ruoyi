@@ -59,6 +59,9 @@
         </trim>
         where id = #{id}
     </update>
+    <update id="removeRelation">
+        update hz_dock_and_bank set state=-1 where dock_id=#{dockId} and bank_id =#{bankId}
+    </update>
 
     <delete id="deleteHzDockAndBankById" parameterType="Long">
         delete from hz_dock_and_bank where id = #{id}

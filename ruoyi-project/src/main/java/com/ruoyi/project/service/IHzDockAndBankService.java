@@ -58,4 +58,11 @@ public interface IHzDockAndBankService
 	 */
 	Integer getExistBank(String qrCode);
 
+	/**
+	 * 查询充电坞是否存在充电宝
+	 * @param bankId
+	 * @param dockId
+	 * @return
+	 */
+	void removeRelation(String bankId, String dockId);
 }

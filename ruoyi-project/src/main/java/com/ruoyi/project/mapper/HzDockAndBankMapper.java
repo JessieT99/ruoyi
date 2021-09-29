@@ -60,4 +60,6 @@ public interface HzDockAndBankMapper
 	public int deleteHzDockAndBankByIds(String[] ids);
 
 	Integer getExistBank(String qrCode);
+
+	void removeRelation(Long dockId, Long bankId);
 }

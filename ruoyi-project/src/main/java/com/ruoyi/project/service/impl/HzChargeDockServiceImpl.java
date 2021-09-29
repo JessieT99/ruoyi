@@ -129,6 +129,7 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService
 			if (hzBankOrderList != null){
 				hzBankOrder = hzBankOrderList.get(0);
 				count = 0;
+				hzDockAndBankService.removeRelation(hzBankOrder.getBankId(),hzBankOrder.getDockId());
 			}
 			count--;
 		}
