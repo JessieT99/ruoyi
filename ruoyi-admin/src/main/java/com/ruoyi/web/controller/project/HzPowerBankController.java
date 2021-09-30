@@ -40,7 +40,7 @@ public class HzPowerBankController extends BaseController {
     private IHzDockAndBankService hzDockAndBankService;
 
 
-    @RequiresPermissions("project:hzPowerBank:view")
+//    @RequiresPermissions("project:hzPowerBank:view")
     @GetMapping()
     public String hzPowerBank() {
         return prefix + "/hzPowerBank";
@@ -49,7 +49,7 @@ public class HzPowerBankController extends BaseController {
     /**
      * 查询充电宝列表
      */
-    @RequiresPermissions("project:hzPowerBank:list")
+//    @RequiresPermissions("project:hzPowerBank:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(HzPowerBank hzPowerBank) {
@@ -62,7 +62,7 @@ public class HzPowerBankController extends BaseController {
     /**
      * 导出充电宝列表
      */
-    @RequiresPermissions("project:hzPowerBank:export")
+//    @RequiresPermissions("project:hzPowerBank:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(HzPowerBank hzPowerBank) {
@@ -82,7 +82,7 @@ public class HzPowerBankController extends BaseController {
     /**
      * 新增保存充电宝
      */
-    @RequiresPermissions("project:hzPowerBank:add")
+//    @RequiresPermissions("project:hzPowerBank:add")
     @Log(title = "充电宝", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -103,7 +103,7 @@ public class HzPowerBankController extends BaseController {
     /**
      * 修改保存充电宝
      */
-    @RequiresPermissions("project:hzPowerBank:edit")
+//    @RequiresPermissions("project:hzPowerBank:edit")
     @Log(title = "充电宝", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -114,7 +114,7 @@ public class HzPowerBankController extends BaseController {
     /**
      * 删除充电宝
      */
-    @RequiresPermissions("project:hzPowerBank:remove")
+//    @RequiresPermissions("project:hzPowerBank:remove")
     @Log(title = "充电宝", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

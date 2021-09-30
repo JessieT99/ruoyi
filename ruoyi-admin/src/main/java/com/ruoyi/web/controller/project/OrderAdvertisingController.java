@@ -30,7 +30,7 @@ public class OrderAdvertisingController extends BaseController
 	@Autowired
 	private IHzOrderAdvertisingService orderAdvertisingService;
 	
-	@RequiresPermissions("system:orderAdvertising:view")
+//	@RequiresPermissions("system:orderAdvertising:view")
 	@GetMapping()
 	public String orderAdvertising()
 	{
@@ -40,7 +40,7 @@ public class OrderAdvertisingController extends BaseController
 	/**
 	 * 查询广告订单列表
 	 */
-	@RequiresPermissions("system:orderAdvertising:list")
+//	@RequiresPermissions("system:orderAdvertising:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(HzOrderAdvertising orderAdvertising)
@@ -54,7 +54,7 @@ public class OrderAdvertisingController extends BaseController
 	/**
 	 * 导出广告订单列表
 	 */
-	@RequiresPermissions("system:orderAdvertising:export")
+//	@RequiresPermissions("system:orderAdvertising:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(HzOrderAdvertising orderAdvertising)
@@ -76,7 +76,7 @@ public class OrderAdvertisingController extends BaseController
 	/**
 	 * 新增保存广告订单
 	 */
-	@RequiresPermissions("system:orderAdvertising:add")
+//	@RequiresPermissions("system:orderAdvertising:add")
 	@Log(title = "广告订单", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -110,7 +110,7 @@ public class OrderAdvertisingController extends BaseController
 	/**
 	 * 修改保存广告订单
 	 */
-	@RequiresPermissions("system:orderAdvertising:edit")
+//	@RequiresPermissions("system:orderAdvertising:edit")
 	@Log(title = "广告订单", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -122,7 +122,7 @@ public class OrderAdvertisingController extends BaseController
 	/**
 	 * 删除广告订单
 	 */
-	@RequiresPermissions("system:orderAdvertising:remove")
+//	@RequiresPermissions("system:orderAdvertising:remove")
 	@Log(title = "广告订单", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody

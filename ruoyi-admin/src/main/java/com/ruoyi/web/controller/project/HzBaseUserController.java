@@ -34,7 +34,7 @@ public class HzBaseUserController extends BaseController
 	@Autowired
 	private IHzBaseUserService hzBaseUserService;
 	
-	@RequiresPermissions("system:hzBaseUser:view")
+//	@RequiresPermissions("system:hzBaseUser:view")
 	@GetMapping()
 	public String hzBaseUser()
 	{
@@ -44,7 +44,7 @@ public class HzBaseUserController extends BaseController
 	/**
 	 * 查询用户列表
 	 */
-	@RequiresPermissions("system:hzBaseUser:list")
+//	@RequiresPermissions("system:hzBaseUser:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(HzBaseUser hzBaseUser)
@@ -58,7 +58,7 @@ public class HzBaseUserController extends BaseController
 	/**
 	 * 导出用户列表
 	 */
-	@RequiresPermissions("system:hzBaseUser:export")
+//	@RequiresPermissions("system:hzBaseUser:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(HzBaseUser hzBaseUser)
@@ -80,7 +80,7 @@ public class HzBaseUserController extends BaseController
 	/**
 	 * 新增保存用户
 	 */
-	@RequiresPermissions("system:hzBaseUser:add")
+//	@RequiresPermissions("system:hzBaseUser:add")
 	@Log(title = "用户", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -103,7 +103,7 @@ public class HzBaseUserController extends BaseController
 	/**
 	 * 修改保存用户
 	 */
-	@RequiresPermissions("system:hzBaseUser:edit")
+//	@RequiresPermissions("system:hzBaseUser:edit")
 	@Log(title = "用户", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -115,7 +115,7 @@ public class HzBaseUserController extends BaseController
 	/**
 	 * 删除用户
 	 */
-	@RequiresPermissions("system:hzBaseUser:remove")
+//	@RequiresPermissions("system:hzBaseUser:remove")
 	@Log(title = "用户", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody

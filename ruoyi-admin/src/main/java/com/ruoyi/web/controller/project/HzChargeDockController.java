@@ -32,7 +32,7 @@ public class HzChargeDockController extends BaseController {
     @Autowired
     private IHzChargeDockService hzChargeDockService;
 
-    @RequiresPermissions("project:hzChargeDock:view")
+//    @RequiresPermissions("project:hzChargeDock:view")
     @GetMapping()
     public String hzChargeDock() {
         return prefix + "/hzChargeDock";
@@ -72,7 +72,7 @@ public class HzChargeDockController extends BaseController {
     /**
      * 查询充电坞列表
      */
-    @RequiresPermissions("project:hzChargeDock:list")
+//    @RequiresPermissions("project:hzChargeDock:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(HzChargeDock hzChargeDock) {
@@ -85,7 +85,7 @@ public class HzChargeDockController extends BaseController {
     /**
      * 导出充电坞列表
      */
-    @RequiresPermissions("project:hzChargeDock:export")
+//    @RequiresPermissions("project:hzChargeDock:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(HzChargeDock hzChargeDock) {
@@ -105,7 +105,7 @@ public class HzChargeDockController extends BaseController {
     /**
      * 新增保存充电坞
      */
-    @RequiresPermissions("project:hzChargeDock:add")
+//    @RequiresPermissions("project:hzChargeDock:add")
     @Log(title = "充电坞", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -126,7 +126,7 @@ public class HzChargeDockController extends BaseController {
     /**
      * 修改保存充电坞
      */
-    @RequiresPermissions("project:hzChargeDock:edit")
+//    @RequiresPermissions("project:hzChargeDock:edit")
     @Log(title = "充电坞", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -137,7 +137,7 @@ public class HzChargeDockController extends BaseController {
     /**
      * 删除充电坞
      */
-    @RequiresPermissions("project:hzChargeDock:remove")
+//    @RequiresPermissions("project:hzChargeDock:remove")
     @Log(title = "充电坞", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody

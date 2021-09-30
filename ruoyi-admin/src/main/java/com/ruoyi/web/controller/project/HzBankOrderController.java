@@ -34,7 +34,7 @@ public class HzBankOrderController extends BaseController
 	@Autowired
 	private IHzBankOrderService hzBankOrderService;
 	
-	@RequiresPermissions("project:hzBankOrder:view")
+//	@RequiresPermissions("project:hzBankOrder:view")
 	@GetMapping()
 	public String hzBankOrder()
 	{
@@ -44,7 +44,7 @@ public class HzBankOrderController extends BaseController
 	/**
 	 * 查询充电宝订单列表
 	 */
-	@RequiresPermissions("project:hzBankOrder:list")
+//	@RequiresPermissions("project:hzBankOrder:list")
 	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(HzBankOrder hzBankOrder)
@@ -58,7 +58,7 @@ public class HzBankOrderController extends BaseController
 	/**
 	 * 导出充电宝订单列表
 	 */
-	@RequiresPermissions("project:hzBankOrder:export")
+//	@RequiresPermissions("project:hzBankOrder:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(HzBankOrder hzBankOrder)
@@ -80,7 +80,7 @@ public class HzBankOrderController extends BaseController
 	/**
 	 * 新增保存充电宝订单
 	 */
-	@RequiresPermissions("project:hzBankOrder:add")
+//	@RequiresPermissions("project:hzBankOrder:add")
 	@Log(title = "充电宝订单", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
@@ -103,7 +103,7 @@ public class HzBankOrderController extends BaseController
 	/**
 	 * 修改保存充电宝订单
 	 */
-	@RequiresPermissions("project:hzBankOrder:edit")
+//	@RequiresPermissions("project:hzBankOrder:edit")
 	@Log(title = "充电宝订单", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
@@ -115,7 +115,7 @@ public class HzBankOrderController extends BaseController
 	/**
 	 * 删除充电宝订单
 	 */
-	@RequiresPermissions("project:hzBankOrder:remove")
+//	@RequiresPermissions("project:hzBankOrder:remove")
 	@Log(title = "充电宝订单", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
