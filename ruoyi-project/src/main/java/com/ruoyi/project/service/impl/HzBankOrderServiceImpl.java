@@ -117,6 +117,7 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 		return hzBankOrderMapper.getBankHzOrderByOpenId(openId,qrCode);
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void updateOrder(HzBankRequestVO hzBankRequestVO) {
 		HzBankOrder hzBankOrder = selectHzBankOrderById(hzBankRequestVO.getOrderId());
@@ -128,6 +129,22 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 
 		hzDockAndBankService.insertRelation(hzBankOrder.getDockId(),hzBankOrder.getBankId());
 
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public void updateOrderGiveBack(HzBankRequestVO hzBankRequestVO) {
+		HzBankOrder hzBankOrder =  hzBankOrderMapper.selectHzBankOrderByBankId(hzBankRequestVO.getBankId());
+		if (hzBankOrder == null){
+			return;
+		}
+		Date endTime = new Date();
+		hzBankOrder.setEndTime(endTime);
+		Long datePoorSecond = DateUtils.getDatePoorSecond(endTime, hzBankOrder.getStartTime());
+		hzBankOrder.setOrderTime(datePoorSecond);
+		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_FINISH.getCode());
+
+		hzDockAndBankService.insertRelation(hzBankOrder.getDockId(),hzBankOrder.getBankId());
 	}
 
 

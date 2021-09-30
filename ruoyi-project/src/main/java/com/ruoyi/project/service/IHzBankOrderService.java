@@ -69,4 +69,6 @@ public interface IHzBankOrderService
 	List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode);
 
 	void updateOrder(HzBankRequestVO hzBankRequestVO);
+
+	void updateOrderGiveBack(HzBankRequestVO hzBankRequestVO);
 }

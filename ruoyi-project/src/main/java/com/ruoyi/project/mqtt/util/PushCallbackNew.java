@@ -78,8 +78,10 @@ public class PushCallbackNew implements MqttCallback {
         }
         if (Objects.equals(MqttType.HZ_BANK_RENT.getCode(), hzBankRequestVO.getType())){//借出充电宝，生成订单
             hzBankOrderService.insertOrder(hzBankRequestVO);
-        }else if(Objects.equals(MqttType.HZ_BANK_RETURN.getCode(), hzBankRequestVO.getType())){
+        }else if(Objects.equals(MqttType.HZ_BANK_RETURN.getCode(), hzBankRequestVO.getType())){//扫描二维码归还
             hzBankOrderService.updateOrder(hzBankRequestVO);
+        }else if(Objects.equals(MqttType.HZ_BANK_GIVE_BACK.getCode(), hzBankRequestVO.getType())){//点击"还" 归还充电宝
+            hzBankOrderService.updateOrderGiveBack(hzBankRequestVO);
         }
     }
 

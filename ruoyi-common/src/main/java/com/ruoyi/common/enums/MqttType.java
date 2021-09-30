@@ -8,7 +8,8 @@ package com.ruoyi.common.enums;
 public enum MqttType {
     HZ_BANK_INFO("0", "发送充电宝信息"),
     HZ_BANK_RENT("1", "借出充电宝"),
-    HZ_BANK_RETURN("2", "归还充电宝");
+    HZ_BANK_RETURN("2", "归还充电宝"),
+    HZ_BANK_GIVE_BACK("3", "归还充电宝");
 
     private final String code;
     private final String info;
