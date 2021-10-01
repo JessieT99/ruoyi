@@ -33,7 +33,7 @@ public interface IHzPowerBankService
      * @param hzPowerBank 充电宝信息
      * @return 结果
      */
-	public int insertHzPowerBank(HzPowerBank hzPowerBank);
+	public Long insertHzPowerBank(HzPowerBank hzPowerBank);
 	
 	/**
      * 修改充电宝

@@ -51,9 +51,11 @@ public class HzPowerBankServiceImpl implements IHzPowerBankService
      * @return 结果
      */
 	@Override
-	public int insertHzPowerBank(HzPowerBank hzPowerBank)
+	public Long insertHzPowerBank(HzPowerBank hzPowerBank)
 	{
-	    return hzPowerBankMapper.insertHzPowerBank(hzPowerBank);
+		int i = hzPowerBankMapper.insertHzPowerBank(hzPowerBank);
+		System.out.println(hzPowerBank.toString());
+		return hzPowerBank.getId();
 	}
 	
 	/**

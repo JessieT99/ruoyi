@@ -8,11 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.project.domain.HzPowerBank;
@@ -86,8 +82,8 @@ public class HzPowerBankController extends BaseController {
     @Log(title = "充电宝", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(HzPowerBank hzPowerBank) {
-        return toAjax(hzPowerBankService.insertHzPowerBank(hzPowerBank));
+    public AjaxResult addSave(@RequestBody HzPowerBank hzPowerBank) {
+        return AjaxResult.success(hzPowerBankService.insertHzPowerBank(hzPowerBank));
     }
 
     /**
@@ -128,7 +124,7 @@ public class HzPowerBankController extends BaseController {
     @Log(title = "充电宝", businessType = BusinessType.INSERT)
     @PostMapping("/insertRelation")
     @ResponseBody
-    public AjaxResult insertRelation(HzDockAndBank hzDockAndBank) {
+    public AjaxResult insertRelation(@RequestBody HzDockAndBank hzDockAndBank) {
         return toAjax(hzDockAndBankService.insertHzDockAndBank(hzDockAndBank));
     }
 
