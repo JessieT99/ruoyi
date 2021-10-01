@@ -64,4 +64,6 @@ public interface HzBankOrderMapper
     List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
 
 	List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode);
+
+	HzBankOrder selectHzBankOrderByBankId(String bankId);
 }
