@@ -126,6 +126,7 @@ public class HzBankOrderServiceImpl implements IHzBankOrderService
 		Long datePoorSecond = DateUtils.getDatePoorSecond(endTime, hzBankOrder.getStartTime());
 		hzBankOrder.setOrderTime(datePoorSecond);
 		hzBankOrder.setOrderStatus(OrderStatus.HZ_ORDER_FINISH.getCode());
+		updateHzBankOrder(hzBankOrder);
 
 		hzDockAndBankService.insertRelation(hzBankOrder.getDockId(),hzBankOrder.getBankId());
 

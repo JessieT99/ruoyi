@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getBankHzOrderByOpenId" resultMap="HzBankOrderResult">
         <include refid="selectHzBankOrderVo"/>
-        where order_user = #{openId}  and dock_id = #{qrCode} and state = 0
+        where order_user = #{openId}  and order_status = 0
     </select>
     <select id="selectHzBankOrderByBankId"  resultMap="HzBankOrderResult">
         <include refid="selectHzBankOrderVo"/>

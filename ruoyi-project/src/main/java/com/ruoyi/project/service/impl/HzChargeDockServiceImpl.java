@@ -157,24 +157,26 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
         HzBankOrder hzBankOrder = hzBankOrderList.get(0);
         Map<String, Object> data = new HashMap<>();
         data.put("type", MqttType.HZ_BANK_RETURN.getCode());
+        data.put("service", ServiceType.HZ_SERVICE_SERVER.getCode());
         data.put("status", MqttStatus.HZ_BANK_SUCCESS.getCode());
         data.put("openId", openId);
         data.put("qrCode", qrCode);
         data.put("bankId", hzBankOrder.getBankId());
         data.put("orderId", hzBankOrder.getId());
         mqttPublishUtil.publish(qrCode, data);
-
+        HzBankOrder order = null;
         int count = 4;
         while (count > 0) {
             TimeUnit.SECONDS.sleep(3);
             hzBankOrder = hzBankOrderService.selectHzBankOrderById(hzBankOrder.getId());
             if (hzBankOrder.getOrderStatus() == OrderStatus.HZ_ORDER_FINISH.getCode()) {
+                order = hzBankOrder;
                 count = 0;
             }
             count--;
         }
 
-        return hzBankOrder;
+        return order;
     }
 
 }
