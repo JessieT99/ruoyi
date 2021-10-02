@@ -1,6 +1,7 @@
 package com.ruoyi.project.mapper;
 
 import com.ruoyi.project.domain.HzBankOrder;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -61,7 +62,7 @@ public interface HzBankOrderMapper
      */
 	public int deleteHzBankOrderByIds(String[] ids);
 
-    List<HzBankOrder> getBankHzOrder(String openId, String qrCode, Date date);
+    List<HzBankOrder> getBankHzOrder(@Param("openId") String openId, String qrCode,@Param("date")Date date);
 
 	List<HzBankOrder> getBankHzOrderByOpenId(String openId, String qrCode);
 

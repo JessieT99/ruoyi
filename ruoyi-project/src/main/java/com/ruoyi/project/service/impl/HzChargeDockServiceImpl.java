@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.ruoyi.common.enums.MqttStatus;
 import com.ruoyi.common.enums.MqttType;
 import com.ruoyi.common.enums.OrderStatus;
+import com.ruoyi.common.enums.ServiceType;
 import com.ruoyi.common.exception.base.BaseException;
 import com.ruoyi.project.config.CoreBaseDataLoaderMqttClient;
 import com.ruoyi.project.domain.HzBankOrder;
@@ -108,12 +109,15 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
     public HzBankOrder rentBank(String openId, String qrCode) throws InterruptedException {
         Integer num = hzDockAndBankService.getExistBank(qrCode);
         if (num < 1) {
+
             new BaseException("project", "004", null, "充电坞没有可用充电宝！");
+            new RuntimeException("充电坞没有可用充电宝！");
         }
         List<HzPowerBank> bankList = hzPowerBankService.getBankByCode(qrCode);
         Date date = new Date();
         Map<String, Object> data = new HashMap<>();
         data.put("type", MqttType.HZ_BANK_INFO.getCode());
+        data.put("service", ServiceType.HZ_SERVICE_SERVER.getCode());
         data.put("status", MqttStatus.HZ_BANK_SUCCESS.getCode());
         data.put("openId", openId);
         data.put("qrCode", qrCode);
@@ -122,9 +126,9 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
         HzBankOrder hzBankOrder = null;
         int count = 4;
         while (count > 0) {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(5);
             List<HzBankOrder> hzBankOrderList = hzBankOrderService.getBankHzOrder(openId, qrCode, date);
-            if (hzBankOrderList != null) {
+            if (!CollectionUtils.isEmpty(hzBankOrderList)) {
                 hzBankOrder = hzBankOrderList.get(0);
                 count = 0;
                 hzDockAndBankService.removeRelation(hzBankOrder.getBankId(), hzBankOrder.getDockId());
@@ -162,7 +166,7 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
 
         int count = 4;
         while (count > 0) {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(3);
             hzBankOrder = hzBankOrderService.selectHzBankOrderById(hzBankOrder.getId());
             if (hzBankOrder.getOrderStatus() == OrderStatus.HZ_ORDER_FINISH.getCode()) {
                 count = 0;

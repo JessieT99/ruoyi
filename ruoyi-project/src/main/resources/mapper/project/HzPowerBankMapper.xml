@@ -29,9 +29,9 @@
         <include refid="selectHzPowerBankVo"/>
         where id = #{id}
     </select>
-    <select id="getBankByCode" resultType="com.ruoyi.project.domain.HzPowerBank"
+    <select id="getBankByCode" resultMap="HzPowerBankResult"
             parameterType="java.lang.String">
-        SELECT hp.* FROM `hz_dock_and_bank` hd INNER join hz_charge_dock hc on hd.dock_id = hc.id INNER join hz_power_bank hp on hd.bank_id = hp.id
+        SELECT hp.id,hp.code_unique,hp.bank_status,hp.bank_electricity FROM `hz_dock_and_bank` hd INNER join hz_charge_dock hc on hd.dock_id = hc.id INNER join hz_power_bank hp on hd.bank_id = hp.id
         where hc.code_unique = #{qrCode}  and hd.state = 1
     </select>
     <select id="getBankIdByCode" resultType="java.lang.Long">

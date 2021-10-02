@@ -13,6 +13,7 @@ import lombok.Data;
 public class HzBankRequestVO
 {
 	private String type;
+	private String service;
 	private String status;
 	private String openId;
 	private String qrCode;
@@ -21,12 +22,14 @@ public class HzBankRequestVO
 
 	@Override
 	public String toString() {
-		return "HzBankOrderGIveVo{" +
+		return "HzBankRequestVO{" +
 				"type='" + type + '\'' +
+				", service='" + service + '\'' +
 				", status='" + status + '\'' +
 				", openId='" + openId + '\'' +
 				", qrCode='" + qrCode + '\'' +
 				", bankId='" + bankId + '\'' +
+				", orderId=" + orderId +
 				'}';
 	}
 }

@@ -1,7 +1,9 @@
 package com.ruoyi.project.mapper;
 
 import com.ruoyi.project.domain.HzDockAndBank;
-import java.util.List;	
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 充电坞与充电宝关联 数据层
@@ -61,5 +63,5 @@ public interface HzDockAndBankMapper
 
 	Integer getExistBank(String qrCode);
 
-	void removeRelation(Long dockId, Long bankId);
+	void removeRelation(@Param("dockId")Long dockId,@Param("bankId") Long bankId);
 }

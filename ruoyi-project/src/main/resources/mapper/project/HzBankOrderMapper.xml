@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getBankHzOrder" resultMap="HzBankOrderResult">
         <include refid="selectHzBankOrderVo"/>
-        where order_user = #{openId}  and start_time > #{date}
+        where order_user = #{openId}  and start_time &gt; #{date}
     </select>
     <select id="getBankHzOrderByOpenId" resultMap="HzBankOrderResult">
         <include refid="selectHzBankOrderVo"/>

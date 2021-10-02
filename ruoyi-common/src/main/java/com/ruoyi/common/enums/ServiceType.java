@@ -5,16 +5,14 @@ package com.ruoyi.common.enums;
  *
  * @author ruoyi
  */
-public enum MqttType {
-    HZ_BANK_INFO("0", "发送充电宝信息"),
-    HZ_BANK_RENT("1", "借出充电宝"),
-    HZ_BANK_RETURN("2", "归还充电宝"),
-    HZ_BANK_GIVE_BACK("3", "'还字'充电宝");
+public enum ServiceType {
+    HZ_SERVICE_SERVER("0", "服务端"),
+    HZ_SERVICE_CLIENT("1", "客户端");
 
     private final String code;
     private final String info;
 
-    MqttType(String code, String info) {
+    ServiceType(String code, String info) {
         this.code = code;
         this.info = info;
     }
