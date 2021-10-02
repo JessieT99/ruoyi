@@ -7,6 +7,7 @@ import com.ruoyi.common.enums.MqttStatus;
 import com.ruoyi.common.enums.MqttType;
 import com.ruoyi.common.enums.OrderStatus;
 import com.ruoyi.common.enums.ServiceType;
+import com.ruoyi.common.exception.RRException;
 import com.ruoyi.common.exception.base.BaseException;
 import com.ruoyi.project.config.CoreBaseDataLoaderMqttClient;
 import com.ruoyi.project.domain.HzBankOrder;
@@ -109,9 +110,10 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
     public HzBankOrder rentBank(String openId, String qrCode) throws InterruptedException {
         Integer num = hzDockAndBankService.getExistBank(qrCode);
         if (num < 1) {
-
+            new RRException("充电坞没有可用充电宝！");
             new BaseException("project", "004", null, "充电坞没有可用充电宝！");
             new RuntimeException("充电坞没有可用充电宝！");
+            return null;
         }
         List<HzPowerBank> bankList = hzPowerBankService.getBankByCode(qrCode);
         Date date = new Date();
