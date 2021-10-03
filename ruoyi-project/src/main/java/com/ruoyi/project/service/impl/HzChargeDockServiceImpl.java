@@ -110,8 +110,6 @@ public class HzChargeDockServiceImpl implements IHzChargeDockService {
     public HzBankOrder rentBank(String openId, String qrCode) throws InterruptedException {
         Integer num = hzDockAndBankService.getExistBank(qrCode);
         if (num < 1) {
-            new RRException("充电坞没有可用充电宝！");
-            new BaseException("project", "004", null, "充电坞没有可用充电宝！");
             new RuntimeException("充电坞没有可用充电宝！");
             return null;
         }
